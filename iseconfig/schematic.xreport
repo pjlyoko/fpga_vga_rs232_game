@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <report-views version="2.0" >
  <header>
-  <DateModified>2019-06-08T21:16:30</DateModified>
+  <DateModified>2019-06-08T21:17:50</DateModified>
   <ModuleName>schematic</ModuleName>
   <SummaryTimeStamp>Unknown</SummaryTimeStamp>
-  <SavedFilePath>/home/przemek/Desktop/ucisw/ucisw2_vga_v05_old/ucisw2_vga/iseconfig/schematic.xreport</SavedFilePath>
-  <ImplementationReportsDirectory>/home/przemek/Desktop/ucisw/ucisw2_vga_v05_old/ucisw2_vga/</ImplementationReportsDirectory>
+  <SavedFilePath>/home/przemek/Desktop/ucisw/ucisw2_vga_v05/ucisw2_vga/iseconfig/schematic.xreport</SavedFilePath>
+  <ImplementationReportsDirectory>/home/przemek/Desktop/ucisw/ucisw2_vga_v05/ucisw2_vga/</ImplementationReportsDirectory>
   <DateInitialized>2019-06-07T09:22:07</DateInitialized>
   <EnableMessageFiltering>false</EnableMessageFiltering>
  </header>

@@ -1,45 +1,18 @@
-----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
--- 
--- Create Date:    12:29:47 05/10/2019 
--- Design Name: 
--- Module Name:    rs232 - Behavioral 
--- Project Name: 
--- Target Devices: 
--- Tool versions: 
--- Description: 
---
--- Dependencies: 
---
--- Revision: 
--- Revision 0.01 - File Created
--- Additional Comments: 
---
-----------------------------------------------------------------------------------
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
-
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
 use IEEE.NUMERIC_STD.ALL;
-
--- Uncomment the following library declaration if instantiating
--- any Xilinx primitives in this code.
---library UNISIM;
---use UNISIM.VComponents.all;
 
 entity rs232 is
     Generic ( cykle_na_bit: integer := 434 );
-    Port ( TxDI:        in  STD_LOGIC_VECTOR (7 downto 0);
-           TxStart:     in  STD_LOGIC;
-           Reset:       in  STD_LOGIC;
-           Clk_50MHz:   in  STD_LOGIC;
-           RS232_RxD:   in  STD_LOGIC;
-           RxRdy:       out  STD_LOGIC := '0';
+    Port ( TxDI:        in   STD_LOGIC_VECTOR (7 downto 0);
+           TxStart:     in   STD_LOGIC;
+           Reset:       in   STD_LOGIC;
+           Clk_50MHz:   in   STD_LOGIC;
+           RS232_RxD:   in   STD_LOGIC;
+           RxRdy:       out  STD_LOGIC := '1';
            RS232_TxD:   out  STD_LOGIC := '1';
-           RxDO:        out  STD_LOGIC_VECTOR (0 to 7);
-           TxBusy:      out  STD_LOGIC);
+           RxDO:        out  STD_LOGIC_VECTOR (7 downto 0) := (others => '0');
+           TxBusy:      out  STD_LOGIC := '0');
 end rs232;
 
 architecture Behavioral of rs232 is
@@ -126,12 +99,12 @@ begin
          licznik_taktow_odbior <= 0;
          licznik_bitow_odbior <= 0;
          RxDO <= (others => '0');
+         
       elsif(rising_edge(Clk_50MHz)) then
-      
          case stan_transmisji_odbior is
             when st_gotowy =>
-               RxRDY <= '1'; -- Powinien by jednotaktowy.
-               if RS232_RxD_stable = '0' then --TODO: Naprawi metastabilno.
+               RxRDY <= '0';
+               if RS232_RxD_stable_pre = '1' and RS232_RxD_stable = '0' then -- Zbocze opadaj¹ce.
                   stan_transmisji_odbior <= st_bit_startu;
                   licznik_taktow_odbior <= 0;
                   licznik_bitow_odbior <= 0;
@@ -172,10 +145,11 @@ begin
                   stan_transmisji_odbior <= st_gotowy;
                   RxRDY <= '1';
                end if;
+            
             when others =>
                stan_transmisji_odbior <= st_gotowy;
+         
          end case;
-      
       end if;
    end process;
 

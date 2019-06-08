@@ -113,12 +113,12 @@ BEGIN
    begin		
       test_byte <= "11110000";
       RS232_RxD <= '1';
+      
       Reset <= '1';
       wait for Clk_50MHz_period;
       Reset <= '0';
-      -- hold reset state for 100 ns.
+      
       wait for 100 ns;	
-
       
       RS232_RxD <= '0';
       wait for BIT_TIME;

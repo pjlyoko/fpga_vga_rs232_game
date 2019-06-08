@@ -55,11 +55,11 @@ ARCHITECTURE behavior OF rs232_test_nadawanie IS
     
 
    --Inputs
-   signal Clk_50MHz : std_logic;
-   signal Reset : std_logic;
-   signal TxDI : std_logic_vector(7 downto 0);
-   signal TxStart : std_logic;
-   signal RS232_RxD : std_logic;
+   signal Clk_50MHz : std_logic := '0';
+   signal Reset : std_logic := '0';
+   signal TxDI : std_logic_vector(7 downto 0) := (others => '0');
+   signal TxStart : std_logic := '0';
+   signal RS232_RxD : std_logic := '0';
 
  	--Outputs
    signal RS232_TxD : std_logic;

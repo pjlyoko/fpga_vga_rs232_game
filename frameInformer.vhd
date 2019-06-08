@@ -41,8 +41,25 @@ end frameInformer;
 
 architecture Behavioral of frameInformer is
 	signal licznik_taktow: integer range 0 to cykle_na_ramke := 0;
+   
+   constant BTN_a:        STD_LOGIC_VECTOR(7 downto 0) := X"61";
+   constant BTN_d:        STD_LOGIC_VECTOR(7 downto 0) := X"64";
+   constant BTN_spacebar: STD_LOGIC_VECTOR(7 downto 0) := X"20";
 begin
-	
+	nowyZnak: process(Clk_50MHz)
+   begin
+      if(rising_edge(Clk_50MHz)) then
+         if(Byte_Rdy = '1') then
+            case ByteIn is
+               when BTN_a        => button <= "10";
+               when BTN_d        => button <= "01";
+               when BTN_spacebar => button <= "11";
+               when others       => null;
+            end case;
+         end if;
+      end if;
+   end process;
+   
 	liczenie: process(Clk_50MHz, Reset)
 	begin
 		if(Reset = '1') then

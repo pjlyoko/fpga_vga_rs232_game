@@ -2,15 +2,6 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
---use IEEE.NUMERIC_STD.ALL;
-
--- Uncomment the following library declaration if instantiating
--- any Xilinx primitives in this code.
---library UNISIM;
---use UNISIM.VComponents.all;
-
 entity obrazek is
     Port ( reset:    in  std_logic;
            row:      in  std_logic_vector(9 downto 0);
@@ -33,55 +24,94 @@ end obrazek;
 -- - (1, 1, 1) - biay
 
 architecture Behavioral of obrazek is
-	signal player_x: integer range 0 to 824 := 0;
-	signal enemy_1_x: integer range 0 to 824 := 300;
-	signal enemy_1_y: integer range 0 to 768 := 0;
+   subtype t_color  is STD_LOGIC_VECTOR(2 downto 0);
+   subtype t_button is STD_LOGIC_VECTOR(1 downto 0);
 	
-	constant COLOR_WHITE:  STD_LOGIC_VECTOR(2 downto 0) := "111";
-	constant COLOR_RED:    STD_LOGIC_VECTOR(2 downto 0) := "100";
-	constant COLOR_YELLOW: STD_LOGIC_VECTOR(2 downto 0) := "110";
+   -- Player: 200 x 50 px, white, 7px/frame
+   signal player_x: integer range 0 to 824 := 0;
+   
+   -- Enemy: 160 x 160 px, red, 3px/frame
+	signal enemy_1_x: integer range 0 to 864 := 300;
+	signal enemy_1_y: integer range 0 to 608 := 0;
+   
+   -- Bullet: 40 x 40 px, yellow, 9px/frame
+   signal bullet_x: integer range 0 to 983 := 0;
+   signal bullet_y: integer range 0 to 728 := 728;
+	
+	constant COLOR_WHITE:   t_color := "111";
+	constant COLOR_RED:     t_color := "100";
+	constant COLOR_YELLOW:  t_color := "110";
+   constant COLOR_NEUTRAL: t_color := "011";
+   
+   constant BUTTON_LEFT:   t_button := "10";
+   constant BUTTON_RIGHT:  t_button := "01";
+   constant BUTTON_SHOOT:  t_button := "11";
+   
+   constant BULLET_PX_PER_FRAME: integer := 9;
+   constant PLAYER_PX_PER_FRAME: integer := 7;
+   constant ENEMY_PX_PER_FRAME:  integer := 3;
+   
+   signal bullet_shot: STD_LOGIC := '0';
 begin
 	recalculate: process(newFrame)
 	begin
 		if(rising_edge(newFrame)) then
-			if(button = "01") then
-				player_x <= player_x + 7;
-			elsif(button = "10") then
-				player_x <= player_x - 7;
-			end if;
+			if(button = BUTTON_LEFT) then
+            if(player_x > 0) then
+               player_x <= player_x - PLAYER_PX_PER_FRAME;
+            end if;
+			elsif(button = BUTTON_RIGHT) then
+            if(player_x < 824) then
+               player_x <= player_x + PLAYER_PX_PER_FRAME;
+            end if;
+			elsif(button = BUTTON_SHOOT) then
+            bullet_shot <= '1';
+         end if;
+         
+         if(bullet_y <= 20) then
+            bullet_shot <= '0';
+         end if;
+         
+         if(bullet_shot = '0') then
+            bullet_y <= 718;
+            bullet_x <= player_x + 80;
+         else
+            bullet_y <= bullet_y - BULLET_PX_PER_FRAME;
+            
+            if(bullet_x >= enemy_1_x and bullet_x <= enemy_1_x + 160 and bullet_y >= enemy_1_y and bullet_y <= enemy_1_y + 160) then
+               enemy_1_y <= 0;
+               bullet_shot <= '0';
+               bullet_y <= 718;
+            end if;
+         end if;
 			
-			enemy_1_y <= enemy_1_y + 3;
+			enemy_1_y <= enemy_1_y + ENEMY_PX_PER_FRAME;
+         if(enemy_1_y = 768) then
+            enemy_1_y <= 0;
+            enemy_1_x <= enemy_1_x + 20;
+         end if;
 		end if;
 	end process;
 	
-	output: process(row, column, reset)
+	output: process(row, column, reset, player_x, enemy_1_x, enemy_1_y, bullet_shot, bullet_x, bullet_y)
 	begin
       if(reset = '1') then
-         color <= "111";
-      else
-         color <= "111";
-			
+         color <= COLOR_NEUTRAL;
+      else			
 			-- Gracz
-			if(unsigned(row) >= player_x and unsigned(row) <= player_x + 200) then
-				if(unsigned(column) >= 718 and unsigned(column) <= 768) then
-					color <= COLOR_WHITE;
-				end if;
-			
-			-- Przeciwnik 1
-			elsif(unsigned(row) >= enemy_1_x and unsigned(row) <= enemy_1_x + 160) then
-				if(unsigned(column) >= enemy_1_y and unsigned(column) <= enemy_1_y + 160) then
-					color <= COLOR_RED;
-				end if;
-			
-			elsif(unsigned(row) >= 50 and unsigned(row) <= 718) then
-            if(unsigned(column) >= 50 and unsigned(column) <= 974) then
-               color <= "011";
-               --if(byte_rdy = '1') then
-               --   color(2) <= byte(2);
-               --   color(1) <= byte(1);
-               --   color(0) <= byte(0);
-               --end if;
-            end if;
+			if(unsigned(column) >= player_x and unsigned(column) <= player_x + 200 and unsigned(row) >= 718 and unsigned(row) <= 768) then
+            color <= COLOR_WHITE;
+         
+         -- Przeciwnik 1
+         elsif(unsigned(column) >= enemy_1_x and unsigned(column) <= enemy_1_x + 160 and unsigned(row) >= enemy_1_y and unsigned(row) <= enemy_1_y + 160) then
+            color <= COLOR_RED;
+            
+         -- Pocisk
+         elsif(unsigned(column) >= bullet_x and unsigned(column) <= bullet_x + 40 and unsigned(row) >= bullet_y and unsigned(row) <= bullet_y + 40) then
+            color <= COLOR_YELLOW;
+         
+         else
+            color <= COLOR_NEUTRAL;
          end if;
       end if;
    end process;
