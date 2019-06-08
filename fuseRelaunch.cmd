@@ -1,1 +1,1 @@
--intstyle "ise" -incremental -o "C:/Users/lab/Desktop/ucisw2_vga/ucisw2_vga/tb_vga_controller_2_isim_beh.exe" -prj "C:/Users/lab/Desktop/ucisw2_vga/ucisw2_vga/tb_vga_controller_2_beh.prj" "work.tb_vga_controller_2" 
+-intstyle "ise" -incremental -o "C:/Users/lab/Desktop/ucisw2_vga_v03/ucisw2_vga/rs232_test_nadawanie_isim_beh.exe" -prj "C:/Users/lab/Desktop/ucisw2_vga_v03/ucisw2_vga/rs232_test_nadawanie_beh.prj" "work.rs232_test_nadawanie" 

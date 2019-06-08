@@ -15,6 +15,8 @@ entity obrazek is
     Port ( -- disp_enable : in  STD_LOGIC;
            row : in  std_logic_vector(9 downto 0);
            column : in  std_logic_vector(9 downto 0);
+           byte : in std_logic_vector(7 downto 0);
+           byte_rdy: in std_logic;
            -- red : out  STD_LOGIC := '0';
            -- green : out  STD_LOGIC := '0';
            -- blue : out  STD_LOGIC := '0'
@@ -43,6 +45,11 @@ begin
       if(unsigned(row) >= 50 and unsigned(row) <= 718) then
          if(unsigned(column) >= 50 and unsigned(column) <= 974) then
             color <= "011";
+            if(byte_rdy = '1') then
+               color(2) <= byte(2);
+               color(1) <= byte(1);
+               color(0) <= byte(0);
+            end if;
          end if;
       end if;
 	end process;
