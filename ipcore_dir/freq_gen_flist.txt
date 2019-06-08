@@ -1,0 +1,2 @@
+# Output products list for <freq_gen>
+freq_gen_flist.txt

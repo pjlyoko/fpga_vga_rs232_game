@@ -1,0 +1,2 @@
+xaw2spl {-intstyle ise} /home/przemek/Desktop/ucisw2_vga/ucisw2_vga/ipcore_dir/freq_gen.xaw 
+spl2sym -intstyle ise -family spartan3e freq_gen.spl /home/przemek/Desktop/ucisw2_vga/ucisw2_vga/freq_gen.sym 
