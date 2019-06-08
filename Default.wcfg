@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="C:/Users/lab/Desktop/ucisw2_vga_v04/ucisw2_vga/rs232_test_odbierania_isim_beh.wdb" id="1" type="auto">
+         <top_modules>
+            <top_module name="numeric_std" />
+            <top_module name="rs232_test_odbierania" />
+            <top_module name="std_logic_1164" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <WVObjectSize size="10" />
+   <wvobject fp_name="/rs232_test_odbierania/txdi" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">txdi[7:0]</obj_property>
+      <obj_property name="ObjectShortName">txdi[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/rs232_test_odbierania/txstart" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">txstart</obj_property>
+      <obj_property name="ObjectShortName">txstart</obj_property>
+   </wvobject>
+   <wvobject fp_name="/rs232_test_odbierania/reset" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">reset</obj_property>
+      <obj_property name="ObjectShortName">reset</obj_property>
+   </wvobject>
+   <wvobject fp_name="/rs232_test_odbierania/clk_50mhz" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">clk_50mhz</obj_property>
+      <obj_property name="ObjectShortName">clk_50mhz</obj_property>
+   </wvobject>
+   <wvobject fp_name="/rs232_test_odbierania/rs232_rxd" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">rs232_rxd</obj_property>
+      <obj_property name="ObjectShortName">rs232_rxd</obj_property>
+   </wvobject>
+   <wvobject fp_name="/rs232_test_odbierania/rxrdy" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">rxrdy</obj_property>
+      <obj_property name="ObjectShortName">rxrdy</obj_property>
+   </wvobject>
+   <wvobject fp_name="/rs232_test_odbierania/rs232_txd" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">rs232_txd</obj_property>
+      <obj_property name="ObjectShortName">rs232_txd</obj_property>
+   </wvobject>
+   <wvobject fp_name="/rs232_test_odbierania/rxdo" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">rxdo[7:0]</obj_property>
+      <obj_property name="ObjectShortName">rxdo[7:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/rs232_test_odbierania/txbusy" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">txbusy</obj_property>
+      <obj_property name="ObjectShortName">txbusy</obj_property>
+   </wvobject>
+   <wvobject fp_name="/rs232_test_odbierania/test_byte" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">test_byte[7:0]</obj_property>
+      <obj_property name="ObjectShortName">test_byte[7:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+   </wvobject>
+</wave_config>

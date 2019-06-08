@@ -17,10 +17,13 @@
         <signal name="XLXN_17(9:0)" />
         <signal name="RS232_TXD" />
         <signal name="RS232_RXD" />
-        <signal name="led0" />
-        <signal name="XLXN_22(7:0)" />
+        <signal name="led0">
+        </signal>
+        <signal name="led(7:0)" />
         <signal name="Clk_50MHz" />
         <signal name="XLXN_24" />
+        <signal name="btn_south" />
+        <signal name="XLXN_26" />
         <port polarity="Output" name="VGA_HS" />
         <port polarity="Output" name="VGA_VS" />
         <port polarity="Output" name="VGA_R" />
@@ -28,8 +31,9 @@
         <port polarity="Output" name="VGA_B" />
         <port polarity="Output" name="RS232_TXD" />
         <port polarity="Input" name="RS232_RXD" />
-        <port polarity="Output" name="led0" />
+        <port polarity="Output" name="led(7:0)" />
         <port polarity="Input" name="Clk_50MHz" />
+        <port polarity="Input" name="btn_south" />
         <blockdef name="freq_gen">
             <timestamp>2019-4-15T18:10:54</timestamp>
             <rect width="336" x="64" y="-256" height="256" />
@@ -41,7 +45,8 @@
             <line x2="464" y1="-32" y2="-32" x1="400" />
         </blockdef>
         <blockdef name="vga_controller">
-            <timestamp>2019-4-16T11:56:37</timestamp>
+            <timestamp>2019-5-24T10:27:23</timestamp>
+            <line x2="0" y1="160" y2="160" x1="64" />
             <line x2="384" y1="-32" y2="-32" x1="320" />
             <line x2="384" y1="32" y2="32" x1="320" />
             <line x2="384" y1="96" y2="96" x1="320" />
@@ -54,10 +59,11 @@
             <line x2="384" y1="-224" y2="-224" x1="320" />
             <rect width="64" x="320" y="-172" height="24" />
             <line x2="384" y1="-160" y2="-160" x1="320" />
-            <rect width="256" x="64" y="-448" height="588" />
+            <rect width="256" x="64" y="-448" height="652" />
         </blockdef>
         <blockdef name="obrazek">
-            <timestamp>2019-5-10T12:22:38</timestamp>
+            <timestamp>2019-5-24T10:29:36</timestamp>
+            <line x2="0" y1="352" y2="352" x1="64" />
             <line x2="0" y1="224" y2="224" x1="64" />
             <rect width="64" x="0" y="276" height="24" />
             <line x2="0" y1="288" y2="288" x1="64" />
@@ -67,7 +73,7 @@
             <line x2="0" y1="32" y2="32" x1="64" />
             <rect width="64" x="0" y="84" height="24" />
             <line x2="0" y1="96" y2="96" x1="64" />
-            <rect width="256" x="64" y="-192" height="520" />
+            <rect width="256" x="64" y="-192" height="584" />
         </blockdef>
         <blockdef name="rs232">
             <timestamp>2019-5-10T12:17:56</timestamp>
@@ -85,7 +91,7 @@
             <line x2="384" y1="-48" y2="-48" x1="320" />
         </blockdef>
         <block symbolname="freq_gen" name="XLXI_1">
-            <blockpin name="RST_IN" />
+            <blockpin signalname="btn_south" name="RST_IN" />
             <blockpin signalname="Clk_50MHz" name="CLKIN_IN" />
             <blockpin name="LOCKED_OUT" />
             <blockpin signalname="XLXN_3" name="CLKFX_OUT" />
@@ -96,8 +102,9 @@
             <blockpin signalname="led0" name="byte_rdy" />
             <blockpin signalname="XLXN_16(9:0)" name="row(9:0)" />
             <blockpin signalname="XLXN_17(9:0)" name="column(9:0)" />
-            <blockpin signalname="XLXN_22(7:0)" name="byte(7:0)" />
+            <blockpin signalname="led(7:0)" name="byte(7:0)" />
             <blockpin signalname="XLXN_10(2:0)" name="color(2:0)" />
+            <blockpin signalname="btn_south" name="reset" />
         </block>
         <block symbolname="vga_controller" name="XLXI_8">
             <blockpin signalname="XLXN_3" name="pixel_clk" />
@@ -109,17 +116,18 @@
             <blockpin signalname="VGA_B" name="vga_b" />
             <blockpin signalname="XLXN_16(9:0)" name="row(9:0)" />
             <blockpin signalname="XLXN_17(9:0)" name="column(9:0)" />
+            <blockpin signalname="btn_south" name="reset" />
         </block>
         <block symbolname="rs232" name="XLXI_9">
             <blockpin name="TxStart" />
-            <blockpin name="Reset" />
+            <blockpin signalname="btn_south" name="Reset" />
             <blockpin signalname="XLXN_24" name="Clk_50MHz" />
             <blockpin signalname="RS232_RXD" name="RS232_RxD" />
             <blockpin name="TxDI(7:0)" />
             <blockpin signalname="led0" name="RxRdy" />
             <blockpin signalname="RS232_TXD" name="RS232_TxD" />
             <blockpin name="TxBusy" />
-            <blockpin signalname="XLXN_22(7:0)" name="RxDO(7:0)" />
+            <blockpin signalname="led(7:0)" name="RxDO(7:0)" />
         </block>
     </netlist>
     <sheet sheetnum="1" width="3520" height="2720">
@@ -179,16 +187,16 @@
             <wire x2="1776" y1="1024" y2="1024" x1="1728" />
             <wire x2="2960" y1="528" y2="528" x1="1728" />
             <wire x2="2960" y1="528" y2="560" x1="2960" />
-            <wire x2="3120" y1="560" y2="560" x1="2960" />
             <wire x2="2960" y1="560" y2="624" x1="2960" />
             <wire x2="2960" y1="624" y2="624" x1="2896" />
         </branch>
-        <branch name="XLXN_22(7:0)">
+        <branch name="led(7:0)">
             <wire x2="1776" y1="1088" y2="1088" x1="1760" />
             <wire x2="1760" y1="1088" y2="1184" x1="1760" />
             <wire x2="2976" y1="1184" y2="1184" x1="1760" />
             <wire x2="2976" y1="864" y2="864" x1="2896" />
             <wire x2="2976" y1="864" y2="1184" x1="2976" />
+            <wire x2="3072" y1="864" y2="864" x1="2976" />
         </branch>
         <iomarker fontsize="28" x="464" y="848" name="Clk_50MHz" orien="R180" />
         <branch name="Clk_50MHz">
@@ -201,9 +209,24 @@
             <wire x2="2224" y1="544" y2="752" x1="2224" />
             <wire x2="2512" y1="752" y2="752" x1="2224" />
         </branch>
-        <iomarker fontsize="28" x="3120" y="560" name="led0" orien="R0" />
         <iomarker fontsize="28" x="2992" y="704" name="RS232_TXD" orien="R0" />
         <instance x="2512" y="912" name="XLXI_9" orien="R0">
         </instance>
+        <branch name="btn_south">
+            <wire x2="512" y1="656" y2="656" x1="448" />
+            <wire x2="608" y1="656" y2="656" x1="512" />
+            <wire x2="624" y1="656" y2="656" x1="608" />
+            <wire x2="512" y1="656" y2="1216" x1="512" />
+            <wire x2="1136" y1="1216" y2="1216" x1="512" />
+            <wire x2="512" y1="1216" y2="1344" x1="512" />
+            <wire x2="1744" y1="1344" y2="1344" x1="512" />
+            <wire x2="2400" y1="1344" y2="1344" x1="1744" />
+            <wire x2="1744" y1="1152" y2="1344" x1="1744" />
+            <wire x2="1776" y1="1152" y2="1152" x1="1744" />
+            <wire x2="2400" y1="688" y2="1344" x1="2400" />
+            <wire x2="2512" y1="688" y2="688" x1="2400" />
+        </branch>
+        <iomarker fontsize="28" x="448" y="656" name="btn_south" orien="R180" />
+        <iomarker fontsize="28" x="3072" y="864" name="led(7:0)" orien="R0" />
     </sheet>
 </drawing>

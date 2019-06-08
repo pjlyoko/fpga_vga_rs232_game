@@ -2,9 +2,9 @@
 -- Company: 
 -- Engineer:
 --
--- Create Date:   13:01:17 05/10/2019
+-- Create Date:   12:55:48 05/24/2019
 -- Design Name:   
--- Module Name:   C:/Users/lab/Desktop/ucisw2_vga_v03/ucisw2_vga/rs232_test_nadawanie.vhd
+-- Module Name:   C:/Users/lab/Desktop/ucisw2_vga_v04/ucisw2_vga/rs232_test_odbierania.vhd
 -- Project Name:  ucisw2_vga
 -- Target Device:  
 -- Tool versions:  
@@ -32,10 +32,10 @@ USE ieee.std_logic_1164.ALL;
 -- arithmetic functions with Signed or Unsigned values
 --USE ieee.numeric_std.ALL;
  
-ENTITY rs232_test_nadawanie IS
-END rs232_test_nadawanie;
+ENTITY rs232_test_odbierania IS
+END rs232_test_odbierania;
  
-ARCHITECTURE behavior OF rs232_test_nadawanie IS 
+ARCHITECTURE behavior OF rs232_test_odbierania IS 
  
     -- Component Declaration for the Unit Under Test (UUT)
  
@@ -46,38 +46,41 @@ ARCHITECTURE behavior OF rs232_test_nadawanie IS
          Reset : IN  std_logic;
          Clk_50MHz : IN  std_logic;
          RS232_RxD : IN  std_logic;
-         RxRDY : OUT  std_logic;
+         RxRdy : OUT  std_logic;
          RS232_TxD : OUT  std_logic;
-         RxDO : OUT  std_logic_vector(7 downto 0);
+         RxDO : OUT  std_logic_vector(0 to 7);
          TxBusy : OUT  std_logic
         );
     END COMPONENT;
     
 
    --Inputs
-   signal Clk_50MHz : std_logic;
-   signal Reset : std_logic;
-   signal TxDI : std_logic_vector(7 downto 0);
-   signal TxStart : std_logic;
-   signal RS232_RxD : std_logic;
+   signal TxDI : std_logic_vector(7 downto 0) := (others => '0');
+   signal TxStart : std_logic := '0';
+   signal Reset : std_logic := '0';
+   signal Clk_50MHz : std_logic := '0';
+   signal RS232_RxD : std_logic := '0';
 
  	--Outputs
+   signal RxRdy : std_logic;
    signal RS232_TxD : std_logic;
    signal RxDO : std_logic_vector(7 downto 0);
    signal TxBusy : std_logic;
-   signal RxRDY : std_logic;
 
    -- Clock period definitions
    constant Clk_50MHz_period : time := 20 ns;
 
    constant BIT_CYCLES : positive := 434;
-   constant BYTE_CYCLES : positive := 10 * BIT_CYCLES;
+   constant BYTE_CYCLES : positive := 8 * BIT_CYCLES;
    constant BIT_TIME : time := BIT_CYCLES * Clk_50Mhz_period;
    constant BYTE_TIME : time := BYTE_CYCLES * Clk_50Mhz_period;
    
    constant SIM_TIME : time := 3 * BYTE_TIME;
    constant SIM_CYCLES : positive := SIM_TIME / Clk_50MHz_period;
    
+   -- test data
+   signal test_byte: std_logic_vector(7 downto 0);
+ 
 BEGIN
  
 	-- Instantiate the Unit Under Test (UUT)
@@ -87,12 +90,12 @@ BEGIN
           Reset => Reset,
           Clk_50MHz => Clk_50MHz,
           RS232_RxD => RS232_RxD,
-          RxRDY => RxRDY,
+          RxRdy => RxRdy,
           RS232_TxD => RS232_TxD,
           RxDO => RxDO,
           TxBusy => TxBusy
         );
-   
+
    clk_proc : process
    begin		
      for i in 1 to SIM_CYCLES loop
@@ -103,35 +106,41 @@ BEGIN
      end loop;
      wait;
    end process;
+ 
 
    -- Stimulus process
    stim_proc: process
-   begin
-      TxStart <= '0';
-      RS232_RxD <= '0';
-      TxDI <= x"12";
-
+   begin		
+      test_byte <= "11110000";
+      RS232_RxD <= '1';
       Reset <= '1';
-      wait for 100 ns;	
+      wait for Clk_50MHz_period;
       Reset <= '0';
+      -- hold reset state for 100 ns.
+      wait for 100 ns;	
 
-      wait for Clk_50MHz_period;
-
-      TxStart <= '1';
-      wait for Clk_50MHz_period;
-      TxStart <= '0';
-
-      wait for BIT_TIME;
-
-      wait until TxBusy = '0';
       
+      RS232_RxD <= '0';
       wait for BIT_TIME;
-
-      TxDI <= x"21";
-      TxStart <= '1';
-      wait for Clk_50MHz_period;
-      TxStart <= '0';
-
+      for i in test_byte'RANGE loop
+         RS232_RxD <= test_byte(i);
+         wait for BIT_TIME;
+      end loop;
+      RS232_RxD <= '1';
+      wait for BIT_TIME;
+      
+      wait for 3 * BIT_TIME;
+      
+      test_byte <= "00001111";
+      RS232_RxD <= '0';
+      wait for BIT_TIME;
+      for i in test_byte'RANGE loop
+         RS232_RxD <= test_byte(i);
+         wait for BIT_TIME;
+      end loop;
+      RS232_RxD <= '1';
+      wait for BIT_TIME;
+      
       wait;
    end process;
 

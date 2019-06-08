@@ -17,6 +17,7 @@ entity vga_controller is
 		v_polarity: STD_LOGIC := '0' -- polaryzacja na wysokości - 0=n, 1=p
 	);
 	Port(
+      reset: in STD_LOGIC;
       color: in STD_LOGIC_VECTOR(2 downto 0);
 		pixel_clk: in STD_LOGIC;
 		-- disp_enable: out STD_LOGIC := '0';
@@ -36,13 +37,24 @@ architecture Behavioral of vga_controller is
 	-- sumaryczna ilość pikseli w kolumnie
 	constant v_period: INTEGER := v_display + v_fp + v_pulse + v_bp;
 begin
-	process (pixel_clk)
+	process (pixel_clk, reset)
 		-- licznik poziomy
 		variable h_count: INTEGER RANGE 0 TO h_period - 1 := 0;
 		-- licznik pionowy
 		variable v_count: INTEGER RANGE 0 TO v_period - 1 := 0;
 	begin
-		if(rising_edge(pixel_clk)) then
+      if(reset = '1') then
+         h_count := 0;
+         v_count := 0;
+         vga_r <= '0';
+         vga_g <= '0';
+         vga_b <= '0';
+         h_sync <= h_polarity;
+         v_sync <= v_polarity;
+         row <= (others => '0');
+         column <= (others => '0');
+      elsif(rising_edge(pixel_clk)) then
+      --if(rising_edge(pixel_clk)) then
 			-- zwiększanie liczników
 			if(h_count < h_period - 1) then
 				h_count := h_count + 1;

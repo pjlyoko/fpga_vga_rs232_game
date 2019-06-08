@@ -20,3 +20,5 @@ vhdtdtfi -lib work obrazek.vhd -prj ucisw2_vga -o obrazek.spl -module obrazek -t
 spl2sym -intstyle ise -family spartan3e -w obrazek.spl C:/Users/lab/Desktop/ucisw2_vga_v03/ucisw2_vga/obrazek.sym 
 vhdtdtfi -lib work obrazek.vhd -prj ucisw2_vga -o obrazek.spl -module obrazek -template C:/Xilinx/14.7/ISE_DS/ISE//data/splfile.tft -deleteonerror 
 spl2sym -intstyle ise -family spartan3e -w obrazek.spl C:/Users/lab/Desktop/ucisw2_vga_v03/ucisw2_vga/obrazek.sym 
+vhdtdtfi -lib work obrazek.vhd -prj ucisw2_vga -o obrazek.spl -module obrazek -template C:/Xilinx/14.7/ISE_DS/ISE//data/splfile.tft -deleteonerror 
+spl2sym -intstyle ise -family spartan3e -w obrazek.spl C:/Users/lab/Desktop/ucisw2_vga_v04/ucisw2_vga/obrazek.sym 

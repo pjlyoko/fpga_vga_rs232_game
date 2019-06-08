@@ -22,3 +22,5 @@ vhdtdtfi -lib work vga_controller.vhd -prj ucisw2_vga -o vga_controller.spl -mod
 spl2sym -intstyle ise -family spartan3e -w vga_controller.spl C:/Users/lab/Desktop/ucisw2_vga/ucisw2_vga/vga_controller.sym 
 vhdtdtfi -lib work vga_controller.vhd -prj ucisw2_vga -o vga_controller.spl -module vga_controller -template C:/Xilinx/14.7/ISE_DS/ISE//data/splfile.tft -deleteonerror 
 spl2sym -intstyle ise -family spartan3e -w vga_controller.spl C:/Users/lab/Desktop/ucisw2_vga/ucisw2_vga/vga_controller.sym 
+vhdtdtfi -lib work vga_controller.vhd -prj ucisw2_vga -o vga_controller.spl -module vga_controller -template C:/Xilinx/14.7/ISE_DS/ISE//data/splfile.tft -deleteonerror 
+spl2sym -intstyle ise -family spartan3e -w vga_controller.spl C:/Users/lab/Desktop/ucisw2_vga_v04/ucisw2_vga/vga_controller.sym 
