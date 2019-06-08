@@ -1,0 +1,6 @@
+vhdtdtfi -lib work frameInformer.vhd -prj ucisw2_vga -o frameInformer.spl -module frameInformer -template /opt/Xilinx/14.7/ISE_DS/ISE//data/splfile.tft -deleteonerror 
+spl2sym -intstyle ise -family spartan3e -w frameInformer.spl /home/przemek/Desktop/ucisw2_vga_v04/ucisw2_vga/frameInformer.sym 
+vhdtdtfi -lib work frameInformer.vhd -prj ucisw2_vga -o frameInformer.spl -module frameInformer -template /opt/Xilinx/14.7/ISE_DS/ISE//data/splfile.tft -deleteonerror 
+spl2sym -intstyle ise -family spartan3e -w frameInformer.spl /home/przemek/Desktop/ucisw2_vga_v05/ucisw2_vga/frameInformer.sym 
+vhdtdtfi -lib work frameInformer.vhd -prj ucisw2_vga -o frameInformer.spl -module frameInformer -template /opt/Xilinx/14.7/ISE_DS/ISE//data/splfile.tft -deleteonerror 
+spl2sym -intstyle ise -family spartan3e -w frameInformer.spl /home/przemek/Desktop/ucisw2_vga_v05/ucisw2_vga/frameInformer.sym 
