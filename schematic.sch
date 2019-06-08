@@ -24,8 +24,6 @@
         <signal name="btn_south" />
         <signal name="XLXN_98" />
         <signal name="RS232_TXD" />
-        <signal name="XLXN_99" />
-        <signal name="XLXN_100(7:0)" />
         <port polarity="Input" name="RS232_RXD" />
         <port polarity="Input" name="Clk_50MHz" />
         <port polarity="Output" name="led(7:0)" />
@@ -104,7 +102,7 @@
             <line x2="384" y1="-96" y2="-96" x1="320" />
             <rect width="256" x="64" y="-128" height="320" />
         </blockdef>
-        <block symbolname="freq_gen" name="XLXI_1">
+        <block symbolname="freq_gen" name="inst1_freq_gen">
             <blockpin signalname="btn_south" name="RST_IN" />
             <blockpin signalname="Clk_50MHz" name="CLKIN_IN" />
             <blockpin name="LOCKED_OUT" />
@@ -112,7 +110,7 @@
             <blockpin name="CLKIN_IBUFG_OUT" />
             <blockpin signalname="XLXN_25" name="CLK0_OUT" />
         </block>
-        <block symbolname="rs232" name="XLXI_9">
+        <block symbolname="rs232" name="inst1_rs232">
             <blockpin signalname="NET_ReceiveReady" name="TxStart" />
             <blockpin signalname="btn_south" name="Reset" />
             <blockpin signalname="XLXN_25" name="Clk_50MHz" />
@@ -123,7 +121,7 @@
             <blockpin name="TxBusy" />
             <blockpin signalname="led(7:0)" name="RxDO(7:0)" />
         </block>
-        <block symbolname="vga_controller" name="XLXI_8">
+        <block symbolname="vga_controller" name="inst1_vga_controller">
             <blockpin signalname="XLXN_37(2:0)" name="color(2:0)" />
             <blockpin signalname="VGA_HS" name="h_sync" />
             <blockpin signalname="VGA_VS" name="v_sync" />
@@ -135,7 +133,7 @@
             <blockpin signalname="btn_south" name="reset" />
             <blockpin signalname="XLXN_98" name="pixel_clk" />
         </block>
-        <block symbolname="obrazek" name="XLXI_7">
+        <block symbolname="obrazek" name="inst1_obrazek">
             <blockpin signalname="XLXN_27" name="newFrame" />
             <blockpin signalname="XLXN_37(2:0)" name="color(2:0)" />
             <blockpin signalname="XLXN_16(9:0)" name="row(9:0)" />
@@ -143,7 +141,7 @@
             <blockpin signalname="XLXN_42(1:0)" name="button(1:0)" />
             <blockpin signalname="btn_south" name="reset" />
         </block>
-        <block symbolname="frameInformer" name="XLXI_10">
+        <block symbolname="frameInformer" name="inst1_frameInformer">
             <blockpin signalname="XLXN_25" name="Clk_50MHz" />
             <blockpin signalname="NET_ReceiveReady" name="Byte_Rdy" />
             <blockpin signalname="btn_south" name="Reset" />
@@ -186,7 +184,7 @@
         <branch name="VGA_VS">
             <wire x2="1824" y1="768" y2="768" x1="1792" />
         </branch>
-        <instance x="1408" y="1056" name="XLXI_8" orien="R0">
+        <instance x="1408" y="1056" name="inst1_vga_controller" orien="R0">
         </instance>
         <branch name="VGA_R">
             <wire x2="1824" y1="1024" y2="1024" x1="1792" />
@@ -204,7 +202,7 @@
         <branch name="XLXN_17(9:0)">
             <wire x2="2048" y1="896" y2="896" x1="1792" />
         </branch>
-        <instance x="2048" y="784" name="XLXI_7" orien="R0">
+        <instance x="2048" y="784" name="inst1_obrazek" orien="R0">
         </instance>
         <branch name="XLXN_37(2:0)">
             <wire x2="1408" y1="960" y2="960" x1="1328" />
@@ -242,9 +240,9 @@
             <wire x2="2032" y1="192" y2="768" x1="2032" />
             <wire x2="2048" y1="768" y2="768" x1="2032" />
         </branch>
-        <instance x="1408" y="288" name="XLXI_10" orien="R0">
+        <instance x="1408" y="288" name="inst1_frameInformer" orien="R0">
         </instance>
-        <instance x="576" y="432" name="XLXI_9" orien="R0">
+        <instance x="576" y="432" name="inst1_rs232" orien="R0">
         </instance>
         <branch name="XLXN_25">
             <wire x2="1264" y1="32" y2="32" x1="528" />
@@ -259,7 +257,7 @@
         <branch name="XLXN_98">
             <wire x2="1408" y1="704" y2="704" x1="1024" />
         </branch>
-        <instance x="560" y="864" name="XLXI_1" orien="R0">
+        <instance x="560" y="864" name="inst1_freq_gen" orien="R0">
         </instance>
         <iomarker fontsize="28" x="384" y="832" name="Clk_50MHz" orien="R180" />
         <iomarker fontsize="28" x="384" y="640" name="btn_south" orien="R180" />

@@ -1,8 +1,8 @@
 INTSTYLE=ise
-INFILE=C:\Users\lab\Desktop\ucisw2_vga_v05\ucisw2_vga\schematic.ncd
-OUTFILE=C:\Users\lab\Desktop\ucisw2_vga_v05\ucisw2_vga\schematic.bit
+INFILE=/home/przemek/Desktop/ucisw2_repo/schematic.ncd
+OUTFILE=/home/przemek/Desktop/ucisw2_repo/schematic.bit
 FAMILY=Spartan3E
 PART=xc3s500e-4fg320
-WORKINGDIR=C:\Users\lab\Desktop\ucisw2_vga_v05\ucisw2_vga
-LICENSE=ISE
-USER_INFO=174693031_177724690_210552578_727
+WORKINGDIR=/home/przemek/Desktop/ucisw2_repo
+LICENSE=WebPack
+USER_INFO=211611673_0_0_073

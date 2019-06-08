@@ -19,18 +19,17 @@ architecture Behavioral of rs232 is
    signal transmitowany_bajt: std_logic_vector (7 downto 0);
    
    type stany_transmisji is (st_gotowy, st_bit_startu, st_dane, st_bit_stopu);
-   signal stan_transmisji:        stany_transmisji := st_gotowy;
-   signal stan_odbioru:           stany_transmisji := st_gotowy;
-   signal stan_transmisji_odbior: stany_transmisji := st_gotowy;
+   signal stan_nadawania: stany_transmisji := st_gotowy;
+   signal stan_odbioru:   stany_transmisji := st_gotowy;
    
    signal licznik_taktow: integer range 0 to cykle_na_bit := 0;
    signal licznik_bitow:  integer range 0 to 7            := 0;
    
-   signal licznik_taktow_odbior: integer range 0 to cykle_na_bit := 0;
-   signal licznik_bitow_odbior:  integer range 0 to 7            := 0;
-	
-	signal RS232_RxD_stable_pre: STD_LOGIC;
-	signal RS232_RxD_stable: STD_LOGIC;
+   signal licznik_taktow_odbior : integer   range 0 to cykle_na_bit := 0;
+   signal licznik_bitow_odbior  : integer   range 0 to 7           := 0;
+   
+   signal RS232_RxD_stable_pre  : STD_LOGIC;
+   signal RS232_RxD_stable      : STD_LOGIC;
 begin
 	RS232_RxD_stable_pre <= RS232_RxD;
 	RS232_RxD_stable <= RS232_RxD_stable_pre;
@@ -38,30 +37,32 @@ begin
    nadawanie: process(Clk_50MHz, Reset)
    begin
       if(reset = '1') then
-         stan_transmisji <= st_gotowy;
+         stan_nadawania <= st_gotowy;
          RS232_TxD <= '1';
          TxBusy <= '0';
          licznik_taktow <= 0;
          licznik_bitow <= 0;
       elsif(rising_edge(Clk_50MHz)) then
          
-         case stan_transmisji is
+         case stan_nadawania is
             when st_gotowy =>
                if(TxStart = '1') then
                   TxBusy <= '1';
                   transmitowany_bajt <= TxDI;
-                  stan_transmisji <= st_bit_startu;
+                  stan_nadawania <= st_bit_startu;
                else
                   TxBusy <= '0';
                end if;
+
             when st_bit_startu =>
                if(licznik_taktow < cykle_na_bit - 1) then
                   RS232_TxD <= '0';
                   licznik_taktow <= licznik_taktow + 1;
                else
                   licznik_taktow <= 0;
-                  stan_transmisji <= st_dane;
+                  stan_nadawania <= st_dane;
                end if;
+
             when st_dane =>
                RS232_TxD <= transmitowany_bajt(licznik_bitow);
                if(licznik_taktow < cykle_na_bit - 1) then
@@ -73,19 +74,21 @@ begin
                   else
                      licznik_bitow <= 0;
                      licznik_taktow <= 0;
-                     stan_transmisji <= st_bit_stopu;
+                     stan_nadawania <= st_bit_stopu;
                   end if;
                end if;
+
             when st_bit_stopu =>
                RS232_TxD <= '1';
                if(licznik_taktow < cykle_na_bit - 1) then
                   licznik_taktow <= licznik_taktow + 1;
                else
                   licznik_taktow <= 0;
-                  stan_transmisji <= st_gotowy;
+                  stan_nadawania <= st_gotowy;
                end if;
+
             when others =>
-               stan_transmisji <= st_gotowy;
+               stan_nadawania <= st_gotowy;
          end case;
 
       end if;
@@ -94,34 +97,34 @@ begin
    odbieranie: process(Clk_50MHz, Reset)
    begin
       if(Reset = '1') then
-         stan_transmisji_odbior <= st_gotowy;
+         stan_odbioru <= st_gotowy;
          RxRDY <= '1';
          licznik_taktow_odbior <= 0;
          licznik_bitow_odbior <= 0;
          RxDO <= (others => '0');
          
       elsif(rising_edge(Clk_50MHz)) then
-         case stan_transmisji_odbior is
+         case stan_odbioru is
             when st_gotowy =>
                RxRDY <= '0';
-               if RS232_RxD_stable_pre = '1' and RS232_RxD_stable = '0' then -- Zbocze opadaj¹ce.
-                  stan_transmisji_odbior <= st_bit_startu;
+               if RS232_RxD_stable_pre = '1' and RS232_RxD_stable = '0' then -- Zbocze opadajace.
+                  stan_odbioru <= st_bit_startu;
                   licznik_taktow_odbior <= 0;
                   licznik_bitow_odbior <= 0;
                end if;
-               
                
             when st_bit_startu =>
                RxRDY <= '0';
                if(licznik_taktow_odbior < cykle_na_bit / 2) then
                   licznik_taktow_odbior <= licznik_taktow_odbior + 1;
                else
+						licznik_taktow_odbior <= 0;
                   if RS232_RxD_stable = '0' then 
-							licznik_taktow_odbior <= 0;
-							stan_transmisji_odbior <= st_dane;
-						end if;
+							stan_odbioru <= st_dane;
+						else
+                     stan_odbioru <= st_gotowy;
+                  end if;
                end if;
-               
                
             when st_dane =>                  
                if(licznik_taktow_odbior < cykle_na_bit - 1) then
@@ -133,7 +136,7 @@ begin
 						
 						if(licznik_bitow_odbior = 7) then
 							licznik_bitow_odbior <= 0;
-							stan_transmisji_odbior <= st_bit_stopu;
+							stan_odbioru <= st_bit_stopu;
 						end if;
 					end if;
 					
@@ -142,16 +145,15 @@ begin
                   licznik_taktow_odbior <= licznik_taktow_odbior + 1;
                else
                   licznik_taktow_odbior <= 0;
-                  stan_transmisji_odbior <= st_gotowy;
+                  stan_odbioru <= st_gotowy;
                   RxRDY <= '1';
                end if;
             
             when others =>
-               stan_transmisji_odbior <= st_gotowy;
+               stan_odbioru <= st_gotowy;
          
          end case;
       end if;
    end process;
 
 end Behavioral;
-
