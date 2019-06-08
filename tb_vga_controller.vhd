@@ -15,11 +15,15 @@ ARCHITECTURE behavior OF tb_vga_controller IS
     COMPONENT vga_controller
     PORT(
          pixel_clk : IN  std_logic;
+         rgb: IN std_logic_vector(2 downto 0);
          disp_enable : OUT  std_logic;
-         row : OUT  std_logic_vector(31 downto 0);
-         column : OUT  std_logic_vector(31 downto 0);
+         row : OUT  std_logic_vector(10 downto 0);
+         column : OUT  std_logic_vector(10 downto 0);
          h_sync : OUT  std_logic;
-         v_sync : OUT  std_logic
+         v_sync : OUT  std_logic;
+         vga_r: out std_logic;
+         vga_g: out std_logic;
+         vga_b: out std_logic
         );
     END COMPONENT;
     

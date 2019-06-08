@@ -1,1 +1,1 @@
--intstyle "ise" -incremental -lib "unisims_ver" -lib "unimacro_ver" -lib "xilinxcorelib_ver" -o "/home/przemek/Desktop/ucisw2_vga/ucisw2_vga/schematic_schematic_sch_tb_isim_beh.exe" -prj "/home/przemek/Desktop/ucisw2_vga/ucisw2_vga/schematic_schematic_sch_tb_beh.prj" "work.schematic_schematic_sch_tb" "work.glbl" 
+-intstyle "ise" -incremental -o "C:/Users/lab/Desktop/ucisw2_vga/ucisw2_vga/tb_vga_controller_2_isim_beh.exe" -prj "C:/Users/lab/Desktop/ucisw2_vga/ucisw2_vga/tb_vga_controller_2_beh.prj" "work.tb_vga_controller_2" 

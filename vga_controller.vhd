@@ -17,12 +17,16 @@ entity vga_controller is
 		v_polarity: STD_LOGIC := '0' -- polaryzacja na wysokości - 0=n, 1=p
 	);
 	Port(
+      color: in STD_LOGIC_VECTOR(2 downto 0);
 		pixel_clk: in STD_LOGIC;
-		disp_enable: out STD_LOGIC := '0';
-      row: out STD_LOGIC_VECTOR(31 downto 0) := (others => '0');
-      column: out STD_LOGIC_VECTOR(31 downto 0) := (others => '0');
+		-- disp_enable: out STD_LOGIC := '0';
+      row: out STD_LOGIC_VECTOR(9 downto 0) := (others => '0');
+      column: out STD_LOGIC_VECTOR(9 downto 0) := (others => '0');
       h_sync: out STD_LOGIC := h_polarity;
-      v_sync: out STD_LOGIC := v_polarity
+      v_sync: out STD_LOGIC := v_polarity;
+      vga_r: out STD_LOGIC := '0';
+      vga_g: out STD_LOGIC := '0';
+      vga_b: out STD_LOGIC := '0'
 	);
 end vga_controller;
 
@@ -66,19 +70,24 @@ begin
 			end if;
 			
 			-- współrzędne
-			if(h_count < h_display) then
-				column <= STD_LOGIC_VECTOR(TO_UNSIGNED(h_count, 32));
-			end if;
-			if(v_count < v_display) then
-				row <= STD_LOGIC_VECTOR(TO_UNSIGNED(v_count, 32));
-			end if;
+         if(v_count < v_display) then
+            row <= STD_LOGIC_VECTOR(TO_UNSIGNED(v_count, 10));
+            if(h_count < h_display) then
+               column <= STD_LOGIC_VECTOR(TO_UNSIGNED(h_count, 10));
+            end if;
+         end if;
+			
 			
 			-- display enable
 			if(h_count < h_display AND v_count < v_display) then
-				disp_enable <= '1';
+				vga_r <= color(2);
+            vga_g <= color(1);
+            vga_b <= color(0);
 			else
 				-- czas blaknięcia
-				disp_enable <= '0';
+				vga_r <= '0';
+            vga_g <= '0';
+            vga_b <= '0';
 			end if;
 			
 		end if;
