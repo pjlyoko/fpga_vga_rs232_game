@@ -65,6 +65,9 @@ architecture Behavioral of obrazek is
    constant BUTTON_SHOOT:  t_button := "11";
    
    signal bullet_shot: STD_LOGIC := '0';
+	
+	signal u_column: INTEGER range 0 to SCREEN_WIDTH := 0;
+	signal u_row:    INTEGER range 0 to SCREEN_HEIGHT := 0;
 begin
    recalculate: process(newFrame, reset)
    begin
@@ -127,30 +130,33 @@ begin
    
    output: process(row, column, reset, player_x, enemy_1_x, enemy_1_y, bullet_shot, bullet_x, bullet_y)
    begin
+		u_column <= to_integer(unsigned(column));
+		u_row    <= to_integer(unsigned(row));
+			
       if(reset = '1') then
          color <= COLOR_NEUTRAL;
-      else        
+      else
          -- Gracz
-         if(unsigned(column) >= player_x 
-				and unsigned(column) <= player_x + PLAYER_WIDTH 
-				and unsigned(row) >= (SCREEN_HEIGHT - PLAYER_HEIGHT) 
-				and unsigned(row) <= SCREEN_HEIGHT) 
+         if(u_column >= player_x 
+				and u_column <= player_x + PLAYER_WIDTH 
+				and u_row >= (SCREEN_HEIGHT - PLAYER_HEIGHT) 
+				and u_row <= SCREEN_HEIGHT) 
          then
             color <= COLOR_WHITE;
          
          -- Przeciwnik 1
-         elsif(unsigned(column) >= enemy_1_x 
-				   and unsigned(column) <= enemy_1_x + ENEMY_WIDTH 
-					and unsigned(row) >= enemy_1_y 
-					and unsigned(row) <= enemy_1_y + ENEMY_HEIGHT) 
+         elsif(u_column >= enemy_1_x 
+				   and u_column <= enemy_1_x + ENEMY_WIDTH 
+					and u_row >= enemy_1_y 
+					and u_row <= enemy_1_y + ENEMY_HEIGHT) 
          then
             color <= COLOR_RED;
             
          -- Pocisk
-         elsif(unsigned(column) >= bullet_x 
-					and unsigned(column) <= bullet_x + BULLET_WIDTH 
-					and unsigned(row) >= bullet_y 
-					and unsigned(row) <= bullet_y + BULLET_HEIGHT) 
+         elsif(u_column >= bullet_x 
+					and u_column <= bullet_x + BULLET_WIDTH 
+					and u_row >= bullet_y 
+					and u_row <= bullet_y + BULLET_HEIGHT) 
          then
             color <= COLOR_YELLOW;
          

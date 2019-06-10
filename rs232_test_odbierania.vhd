@@ -1,71 +1,36 @@
---------------------------------------------------------------------------------
--- Company: 
--- Engineer:
---
--- Create Date:   12:55:48 05/24/2019
--- Design Name:   
--- Module Name:   C:/Users/lab/Desktop/ucisw2_vga_v04/ucisw2_vga/rs232_test_odbierania.vhd
--- Project Name:  ucisw2_vga
--- Target Device:  
--- Tool versions:  
--- Description:   
--- 
--- VHDL Test Bench Created by ISE for module: rs232
--- 
--- Dependencies:
--- 
--- Revision:
--- Revision 0.01 - File Created
--- Additional Comments:
---
--- Notes: 
--- This testbench has been automatically generated using types std_logic and
--- std_logic_vector for the ports of the unit under test.  Xilinx recommends
--- that these types always be used for the top-level I/O of a design in order
--- to guarantee that the testbench will bind correctly to the post-implementation 
--- simulation model.
---------------------------------------------------------------------------------
 LIBRARY ieee;
-USE ieee.std_logic_1164.ALL;
- 
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
---USE ieee.numeric_std.ALL;
+USE ieee.STD_LOGIC_1164.ALL;
  
 ENTITY rs232_test_odbierania IS
 END rs232_test_odbierania;
  
 ARCHITECTURE behavior OF rs232_test_odbierania IS 
- 
-    -- Component Declaration for the Unit Under Test (UUT)
- 
-    COMPONENT rs232
-    PORT(
-         TxDI : IN  std_logic_vector(7 downto 0);
-         TxStart : IN  std_logic;
-         Reset : IN  std_logic;
-         Clk_50MHz : IN  std_logic;
-         RS232_RxD : IN  std_logic;
-         RxRdy : OUT  std_logic;
-         RS232_TxD : OUT  std_logic;
-         RxDO : OUT  std_logic_vector(0 to 7);
-         TxBusy : OUT  std_logic
-        );
-    END COMPONENT;
-    
+   -- Component Declaration for the Unit Under Test (UUT)
 
+   COMPONENT rs232
+   PORT(TxDI:      IN  STD_LOGIC_VECTOR(7 downto 0);
+        TxStart:   IN  STD_LOGIC;
+        Reset:     IN  STD_LOGIC;
+        Clk_50MHz: IN  STD_LOGIC;
+        RS232_RxD: IN  STD_LOGIC;
+        RxRdy:     OUT STD_LOGIC;
+        RS232_TxD: OUT STD_LOGIC;
+        RxDO:      OUT STD_LOGIC_VECTOR(7 downto 0);
+        TxBusy:    OUT STD_LOGIC);
+   END COMPONENT;
+   
    --Inputs
-   signal TxDI : std_logic_vector(7 downto 0) := (others => '0');
-   signal TxStart : std_logic := '0';
-   signal Reset : std_logic := '0';
-   signal Clk_50MHz : std_logic := '0';
-   signal RS232_RxD : std_logic := '0';
+   signal TxDI:      STD_LOGIC_VECTOR(7 downto 0) := (others => '0');
+   signal TxStart:   STD_LOGIC                    := '0';
+   signal Reset:     STD_LOGIC                    := '0';
+   signal Clk_50MHz: STD_LOGIC                    := '0';
+   signal RS232_RxD: STD_LOGIC                    := '0';
 
- 	--Outputs
-   signal RxRdy : std_logic;
-   signal RS232_TxD : std_logic;
-   signal RxDO : std_logic_vector(7 downto 0);
-   signal TxBusy : std_logic;
+   --Outputs
+   signal RxRdy:     STD_LOGIC;
+   signal RS232_TxD: STD_LOGIC;
+   signal RxDO:      STD_LOGIC_VECTOR(7 downto 0);
+   signal TxBusy:    STD_LOGIC;
 
    -- Clock period definitions
    constant Clk_50MHz_period : time := 20 ns;
@@ -75,29 +40,26 @@ ARCHITECTURE behavior OF rs232_test_odbierania IS
    constant BIT_TIME : time := BIT_CYCLES * Clk_50Mhz_period;
    constant BYTE_TIME : time := BYTE_CYCLES * Clk_50Mhz_period;
    
-   constant SIM_TIME : time := 3 * BYTE_TIME;
+   constant SIM_TIME : time := 5 * BYTE_TIME;
    constant SIM_CYCLES : positive := SIM_TIME / Clk_50MHz_period;
    
    -- test data
-   signal test_byte: std_logic_vector(7 downto 0);
+   signal test_byte: STD_LOGIC_VECTOR(0 to 7);
  
 BEGIN
- 
-	-- Instantiate the Unit Under Test (UUT)
-   uut: rs232 PORT MAP (
-          TxDI => TxDI,
-          TxStart => TxStart,
-          Reset => Reset,
-          Clk_50MHz => Clk_50MHz,
-          RS232_RxD => RS232_RxD,
-          RxRdy => RxRdy,
-          RS232_TxD => RS232_TxD,
-          RxDO => RxDO,
-          TxBusy => TxBusy
-        );
+   -- Instantiate the Unit Under Test (UUT)
+   uut: rs232 PORT MAP (TxDI => TxDI,
+                        TxStart => TxStart,
+                        Reset => Reset,
+                        Clk_50MHz => Clk_50MHz,
+                        RS232_RxD => RS232_RxD,
+                        RxRdy => RxRdy,
+                        RS232_TxD => RS232_TxD,
+                        RxDO => RxDO,
+                        TxBusy => TxBusy);
 
-   clk_proc : process
-   begin		
+   clk_proc: process
+   begin    
      for i in 1 to SIM_CYCLES loop
        Clk_50MHz <= '0';
        wait for Clk_50MHz_period / 2;
@@ -106,19 +68,19 @@ BEGIN
      end loop;
      wait;
    end process;
- 
 
    -- Stimulus process
    stim_proc: process
-   begin		
+   begin    
       test_byte <= "11110000";
       RS232_RxD <= '1';
       
       Reset <= '1';
-      wait for Clk_50MHz_period;
+      wait for BIT_TIME;
       Reset <= '0';
       
-      wait for 100 ns;	
+      wait for 10 * BIT_TIME; 
+      wait for Clk_50MHz_period / 2;
       
       RS232_RxD <= '0';
       wait for BIT_TIME;
@@ -143,5 +105,4 @@ BEGIN
       
       wait;
    end process;
-
 END;

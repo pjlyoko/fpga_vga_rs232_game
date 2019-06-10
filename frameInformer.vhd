@@ -16,21 +16,26 @@ end frameInformer;
 architecture Behavioral of frameInformer is
    signal licznik_taktow: integer range 0 to cykle_na_ramke := 0;
    
-   constant BTN_a:        STD_LOGIC_VECTOR(7 downto 0) := X"61";
-   constant BTN_d:        STD_LOGIC_VECTOR(7 downto 0) := X"64";
-   constant BTN_spacebar: STD_LOGIC_VECTOR(7 downto 0) := X"20";
+   constant BTN_a:         STD_LOGIC_VECTOR(7 downto 0) := X"61";
+   constant BTN_d:         STD_LOGIC_VECTOR(7 downto 0) := X"64";
+   constant BTN_spacebar:  STD_LOGIC_VECTOR(7 downto 0) := X"20";
+	
+	constant OUT_BTN_none:  STD_LOGIC_VECTOR(1 downto 0) := "00";
+	constant OUT_BTN_left:  STD_LOGIC_VECTOR(1 downto 0) := "10";
+	constant OUT_BTN_right: STD_LOGIC_VECTOR(1 downto 0) := "01";
+	constant OUT_BTN_shoot: STD_LOGIC_VECTOR(1 downto 0) := "11";
 begin
    -- Proces obsługi znaków pojawiających się na porcie RS232
    nowyZnak: process(Clk_50MHz, Reset)
    begin
       if(Reset = '1') then
-         button <= "00";
+         button <= OUT_BTN_none;
       elsif(rising_edge(Clk_50MHz)) then
          if(Byte_Rdy = '1') then
             case ByteIn is
-               when BTN_a        => button <= "10";
-               when BTN_d        => button <= "01";
-               when BTN_spacebar => button <= "11";
+               when BTN_a        => button <= OUT_BTN_left;
+               when BTN_d        => button <= OUT_BTN_right;
+               when BTN_spacebar => button <= OUT_BTN_shoot;
                when others       => null;
             end case;
          end if;
@@ -44,13 +49,11 @@ begin
          licznik_taktow <= 0;
          newFrame <= '0';
       elsif(rising_edge(Clk_50MHz)) then
-         if(licznik_taktow = 0) then
-            licznik_taktow <= licznik_taktow + 1;
-            newFrame <= '0';
-
+			if(licznik_taktow = 0) then
+				newFrame <= '0';
+				licznik_taktow <= licznik_taktow + 1;
          elsif(licznik_taktow < cykle_na_ramke - 1) then
-            licznik_taktow <= licznik_taktow + 1;
-
+				licznik_taktow <= licznik_taktow + 1;
          else
             newFrame <= '1';
             licznik_taktow <= 0;

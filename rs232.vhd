@@ -28,12 +28,9 @@ architecture Behavioral of rs232 is
    signal licznik_taktow_odbior: INTEGER range 0 to cykle_na_bit := 0;
    signal licznik_bitow_odbior:  INTEGER range 0 to 7            := 0;
    
-   signal RS232_RxD_stable_pre:  STD_LOGIC;
-   signal RS232_RxD_stable:      STD_LOGIC;
+   signal RS232_RxD_stable_pre:  STD_LOGIC                       := '1';
+   signal RS232_RxD_stable:      STD_LOGIC                       := '1';
 begin
-	RS232_RxD_stable_pre <= RS232_RxD;
-	RS232_RxD_stable     <= RS232_RxD_stable_pre;
-	
    nadawanie: process(Clk_50MHz, Reset)
    begin
       if(reset = '1') then
@@ -71,12 +68,12 @@ begin
                else
                   if(licznik_bitow < 7) then
                      licznik_bitow <= licznik_bitow + 1;
-                     licznik_taktow <= 0;
                   else
                      licznik_bitow <= 0;
-                     licznik_taktow <= 0;
                      stan_nadawania <= st_bit_stopu;
                   end if;
+						
+						licznik_taktow <= 0;
                end if;
 
             when st_bit_stopu =>
@@ -106,10 +103,15 @@ begin
          RxDO                  <= (others => '0');
          
       elsif(rising_edge(Clk_50MHz)) then
-         case stan_odbioru is
+         RS232_RxD_stable     <= RS232_RxD_stable_pre;
+			RS232_RxD_stable_pre <= RS232_RxD;
+         
+			case stan_odbioru is
             when st_gotowy =>
                RxRDY <= '0';
-               if RS232_RxD_stable_pre = '1' and RS232_RxD_stable = '0' then -- Zbocze opadające odbieranego sygnału
+					-- RS232_RxD_stable_pre jest sygnałem "na bieżąco"
+					-- RS232_RxD_stable     jest sygnałem opóźnionym o 1 takt, biorącym wartość z RS232_RxD_stable_pre
+               if RS232_RxD_stable_pre = '0' and RS232_RxD_stable = '1' then -- Zbocze opadające odbieranego sygnału
                   stan_odbioru <= st_bit_startu;
                   licznik_taktow_odbior <= 0;
                   licznik_bitow_odbior <= 0;
@@ -133,12 +135,13 @@ begin
                   licznik_taktow_odbior <= licznik_taktow_odbior + 1;
                else
 						RxDO(licznik_bitow_odbior) <= RS232_RxD_stable;
-                  licznik_bitow_odbior <= licznik_bitow_odbior + 1;
 						licznik_taktow_odbior <= 0;
 						
 						if(licznik_bitow_odbior = 7) then
 							licznik_bitow_odbior <= 0;
 							stan_odbioru <= st_bit_stopu;
+						else
+							licznik_bitow_odbior <= licznik_bitow_odbior + 1;
 						end if;
 					end if;
 					
