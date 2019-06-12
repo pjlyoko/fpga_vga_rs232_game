@@ -7,6 +7,7 @@ entity obrazek is
           row:      in  STD_LOGIC_VECTOR(9 downto 0);
           column:   in  STD_LOGIC_VECTOR(9 downto 0);
           newFrame: in  STD_LOGIC;
+			 randomX:  in  STD_LOGIC_VECTOR(9 downto 0);
           button:   in  STD_LOGIC_VECTOR(1 downto 0);
           color:    out STD_LOGIC_VECTOR(2 downto 0));
 end obrazek;
@@ -68,12 +69,16 @@ architecture Behavioral of obrazek is
 	
 	signal u_column: INTEGER range 0 to SCREEN_WIDTH := 0;
 	signal u_row:    INTEGER range 0 to SCREEN_HEIGHT := 0;
+	
+	signal random_position_X: integer range 0 to SCREEN_WIDTH := 0;
 begin
-   recalculate: process(newFrame, reset)
+   recalculate: process(newFrame, reset, randomX)
    begin
+		random_position_X <= to_integer(unsigned(randomX));
+		
       if(reset = '1') then
          player_x <= 0;
-         enemy_1_x <= 0;
+         enemy_1_x <= random_position_X;
          enemy_1_y <= 0;
          bullet_x <= 0;
          bullet_y <= SCREEN_HEIGHT - BULLET_HEIGHT;
@@ -123,7 +128,7 @@ begin
          
          if(enemy_1_y = SCREEN_HEIGHT) then
             enemy_1_y <= 0;
-            enemy_1_x <= enemy_1_x + 20;
+            enemy_1_x <= random_position_X;
          end if;
       end if;
    end process;

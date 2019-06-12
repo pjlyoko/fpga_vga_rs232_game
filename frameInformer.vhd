@@ -10,7 +10,8 @@ entity frameInformer is
          ByteIn:    in  STD_LOGIC_VECTOR(7 downto 0);
          Reset:     in  STD_LOGIC;
          newFrame:  out STD_LOGIC                    := '0';
-         button:    out STD_LOGIC_VECTOR(1 downto 0) := "00");
+         button:    out STD_LOGIC_VECTOR(1 downto 0) := "00";
+			random:    inout STD_LOGIC_VECTOR(9 downto 0) := (others => '0'));
 end frameInformer;
 
 architecture Behavioral of frameInformer is
@@ -25,6 +26,16 @@ architecture Behavioral of frameInformer is
 	constant OUT_BTN_right: STD_LOGIC_VECTOR(1 downto 0) := "01";
 	constant OUT_BTN_shoot: STD_LOGIC_VECTOR(1 downto 0) := "11";
 begin
+	losowa_liczba: process(Clk_50MHz, Reset)
+	begin
+		if(Reset = '1') then
+			random <= (others => '0');
+		elsif(rising_edge(Clk_50MHz)) then
+			random(9 downto 1) <= random(8 downto 0);
+			random(0)          <= not(random(9) XOR random(8) XOR random(7) XOR random(2));
+		end if;
+	end process;
+	
    -- Proces obsługi znaków pojawiających się na porcie RS232
    nowyZnak: process(Clk_50MHz, Reset)
    begin

@@ -1,0 +1,4 @@
+vhdtdtfi -lib work rng.vhd -prj ucisw2_vga -o rng.spl -module rng -template /opt/Xilinx/14.7/ISE_DS/ISE//data/splfile.tft -deleteonerror 
+spl2sym -intstyle ise -family spartan3e -w rng.spl /home/przemek/Desktop/ucisw2_repo/rng.sym 
+vhdtdtfi -lib work rng.vhd -prj ucisw2_vga -o rng.spl -module rng -template /opt/Xilinx/14.7/ISE_DS/ISE//data/splfile.tft -deleteonerror 
+spl2sym -intstyle ise -family spartan3e -w rng.spl /home/przemek/Desktop/ucisw2_repo/rng.sym 

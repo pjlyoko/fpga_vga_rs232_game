@@ -33,3 +33,5 @@ vhdtdtfi -lib work obrazek.vhd -prj ucisw2_vga -o obrazek.spl -module obrazek -t
 spl2sym -intstyle ise -family spartan3e -w obrazek.spl /home/przemek/Desktop/ucisw2_repo/obrazek.sym 
 vhdtdtfi -lib work obrazek.vhd -prj ucisw2_vga -o obrazek.spl -module obrazek -template /opt/Xilinx/14.7/ISE_DS/ISE//data/splfile.tft -deleteonerror 
 spl2sym -intstyle ise -family spartan3e -w obrazek.spl /home/przemek/Desktop/ucisw2_repo/obrazek.sym 
+vhdtdtfi -lib work obrazek.vhd -prj ucisw2_vga -o obrazek.spl -module obrazek -template /opt/Xilinx/14.7/ISE_DS/ISE//data/splfile.tft -deleteonerror 
+spl2sym -intstyle ise -family spartan3e -w obrazek.spl /home/przemek/Desktop/ucisw2_repo/obrazek.sym 
