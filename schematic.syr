@@ -1,0 +1,749 @@
+Release 14.7 - xst P.20131013 (lin64)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+--> 
+Parameter TMPDIR set to xst/projnav.tmp
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.04 secs
+ 
+--> 
+Parameter xsthdpdir set to xst
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.04 secs
+ 
+--> 
+Reading design: schematic.prj
+
+TABLE OF CONTENTS
+  1) Synthesis Options Summary
+  2) HDL Compilation
+  3) Design Hierarchy Analysis
+  4) HDL Analysis
+  5) HDL Synthesis
+     5.1) HDL Synthesis Report
+  6) Advanced HDL Synthesis
+     6.1) Advanced HDL Synthesis Report
+  7) Low Level Synthesis
+  8) Partition Report
+  9) Final Report
+	9.1) Device utilization summary
+	9.2) Partition Resource Summary
+	9.3) TIMING REPORT
+
+
+=========================================================================
+*                      Synthesis Options Summary                        *
+=========================================================================
+---- Source Parameters
+Input File Name                    : "schematic.prj"
+Input Format                       : mixed
+Ignore Synthesis Constraint File   : NO
+
+---- Target Parameters
+Output File Name                   : "schematic"
+Output Format                      : NGC
+Target Device                      : xc3s500e-4-fg320
+
+---- Source Options
+Top Module Name                    : schematic
+Automatic FSM Extraction           : YES
+FSM Encoding Algorithm             : Auto
+Safe Implementation                : No
+FSM Style                          : LUT
+RAM Extraction                     : Yes
+RAM Style                          : Auto
+ROM Extraction                     : Yes
+Mux Style                          : Auto
+Decoder Extraction                 : YES
+Priority Encoder Extraction        : Yes
+Shift Register Extraction          : YES
+Logical Shifter Extraction         : YES
+XOR Collapsing                     : YES
+ROM Style                          : Auto
+Mux Extraction                     : Yes
+Resource Sharing                   : YES
+Asynchronous To Synchronous        : NO
+Multiplier Style                   : Auto
+Automatic Register Balancing       : No
+
+---- Target Options
+Add IO Buffers                     : YES
+Global Maximum Fanout              : 100000
+Add Generic Clock Buffer(BUFG)     : 24
+Register Duplication               : YES
+Slice Packing                      : YES
+Optimize Instantiated Primitives   : NO
+Use Clock Enable                   : Yes
+Use Synchronous Set                : Yes
+Use Synchronous Reset              : Yes
+Pack IO Registers into IOBs        : Auto
+Equivalent register Removal        : YES
+
+---- General Options
+Optimization Goal                  : Speed
+Optimization Effort                : 1
+Keep Hierarchy                     : No
+Netlist Hierarchy                  : As_Optimized
+RTL Output                         : Yes
+Global Optimization                : AllClockNets
+Read Cores                         : YES
+Write Timing Constraints           : NO
+Cross Clock Analysis               : NO
+Hierarchy Separator                : /
+Bus Delimiter                      : <>
+Case Specifier                     : Maintain
+Slice Utilization Ratio            : 100
+BRAM Utilization Ratio             : 100
+Verilog 2001                       : YES
+Auto BRAM Packing                  : NO
+Slice Utilization Ratio Delta      : 5
+
+=========================================================================
+
+
+=========================================================================
+*                          HDL Compilation                              *
+=========================================================================
+Compiling vhdl file "/home/przemek/Desktop/ucisw2_repo/frameInformer.vhd" in Library work.
+Architecture behavioral of Entity frameinformer is up to date.
+Compiling vhdl file "/home/przemek/Desktop/ucisw2_repo/obrazek.vhd" in Library work.
+Architecture behavioral of Entity obrazek is up to date.
+Compiling vhdl file "/home/przemek/Desktop/ucisw2_repo/rs232.vhd" in Library work.
+Architecture behavioral of Entity rs232 is up to date.
+Compiling vhdl file "/home/przemek/Desktop/ucisw2_repo/vga_controller.vhd" in Library work.
+Architecture behavioral of Entity vga_controller is up to date.
+Compiling verilog file "freq_gen.v" in library work
+Compiling verilog file "schematic.vf" in library work
+Module <freq_gen> compiled
+Module <schematic> compiled
+No errors in compilation
+Analysis of file <"schematic.prj"> succeeded.
+ 
+
+=========================================================================
+*                     Design Hierarchy Analysis                         *
+=========================================================================
+Analyzing hierarchy for module <schematic> in library <work>.
+
+Analyzing hierarchy for entity <frameinformer> in library <work> (architecture <behavioral>) with generics.
+	cykle_na_ramke = 1666667
+
+Analyzing hierarchy for module <freq_gen> in library <work>.
+
+Analyzing hierarchy for entity <obrazek> in library <work> (architecture <behavioral>).
+
+Analyzing hierarchy for entity <rs232> in library <work> (architecture <behavioral>) with generics.
+	cykle_na_bit = 434
+
+Analyzing hierarchy for entity <vga_controller> in library <work> (architecture <behavioral>) with generics.
+	h_bp = 160
+	h_display = 1024
+	h_fp = 24
+	h_polarity = '0'
+	h_pulse = 136
+	v_bp = 29
+	v_display = 768
+	v_fp = 3
+	v_polarity = '0'
+	v_pulse = 6
+
+
+=========================================================================
+*                            HDL Analysis                               *
+=========================================================================
+Analyzing top module <schematic>.
+Module <schematic> is correct for synthesis.
+ 
+    Set user-defined property "INIT =  0" for instance <XLXI_3> in unit <schematic>.
+    Set user-defined property "INIT =  0" for instance <XLXI_4> in unit <schematic>.
+    Set user-defined property "INIT =  0" for instance <XLXI_8> in unit <schematic>.
+Analyzing generic Entity <frameinformer> in library <work> (Architecture <behavioral>).
+	cykle_na_ramke = 1666667
+Entity <frameinformer> analyzed. Unit <frameinformer> generated.
+
+Analyzing module <freq_gen> in library <work>.
+Module <freq_gen> is correct for synthesis.
+ 
+    Set user-defined property "CAPACITANCE =  DONT_CARE" for instance <CLKIN_IBUFG_INST> in unit <freq_gen>.
+    Set user-defined property "IBUF_DELAY_VALUE =  0" for instance <CLKIN_IBUFG_INST> in unit <freq_gen>.
+    Set user-defined property "IBUF_LOW_PWR =  TRUE" for instance <CLKIN_IBUFG_INST> in unit <freq_gen>.
+    Set user-defined property "IOSTANDARD =  DEFAULT" for instance <CLKIN_IBUFG_INST> in unit <freq_gen>.
+    Set user-defined property "CLKDV_DIVIDE =  2.000000" for instance <DCM_SP_INST> in unit <freq_gen>.
+    Set user-defined property "CLKFX_DIVIDE =  10" for instance <DCM_SP_INST> in unit <freq_gen>.
+    Set user-defined property "CLKFX_MULTIPLY =  13" for instance <DCM_SP_INST> in unit <freq_gen>.
+    Set user-defined property "CLKIN_DIVIDE_BY_2 =  FALSE" for instance <DCM_SP_INST> in unit <freq_gen>.
+    Set user-defined property "CLKIN_PERIOD =  20.000000" for instance <DCM_SP_INST> in unit <freq_gen>.
+    Set user-defined property "CLKOUT_PHASE_SHIFT =  NONE" for instance <DCM_SP_INST> in unit <freq_gen>.
+    Set user-defined property "CLK_FEEDBACK =  1X" for instance <DCM_SP_INST> in unit <freq_gen>.
+    Set user-defined property "DESKEW_ADJUST =  SYSTEM_SYNCHRONOUS" for instance <DCM_SP_INST> in unit <freq_gen>.
+    Set user-defined property "DFS_FREQUENCY_MODE =  LOW" for instance <DCM_SP_INST> in unit <freq_gen>.
+    Set user-defined property "DLL_FREQUENCY_MODE =  LOW" for instance <DCM_SP_INST> in unit <freq_gen>.
+    Set user-defined property "DSS_MODE =  NONE" for instance <DCM_SP_INST> in unit <freq_gen>.
+    Set user-defined property "DUTY_CYCLE_CORRECTION =  TRUE" for instance <DCM_SP_INST> in unit <freq_gen>.
+    Set user-defined property "FACTORY_JF =  C080" for instance <DCM_SP_INST> in unit <freq_gen>.
+    Set user-defined property "PHASE_SHIFT =  0" for instance <DCM_SP_INST> in unit <freq_gen>.
+    Set user-defined property "STARTUP_WAIT =  FALSE" for instance <DCM_SP_INST> in unit <freq_gen>.
+Analyzing Entity <obrazek> in library <work> (Architecture <behavioral>).
+Entity <obrazek> analyzed. Unit <obrazek> generated.
+
+Analyzing generic Entity <rs232> in library <work> (Architecture <behavioral>).
+	cykle_na_bit = 434
+Entity <rs232> analyzed. Unit <rs232> generated.
+
+Analyzing generic Entity <vga_controller> in library <work> (Architecture <behavioral>).
+	h_bp = 160
+	h_display = 1024
+	h_fp = 24
+	h_polarity = '0'
+	h_pulse = 136
+	v_bp = 29
+	v_display = 768
+	v_fp = 3
+	v_polarity = '0'
+	v_pulse = 6
+Entity <vga_controller> analyzed. Unit <vga_controller> generated.
+
+
+=========================================================================
+*                           HDL Synthesis                               *
+=========================================================================
+
+Performing bidirectional port resolution...
+
+Synthesizing Unit <frameinformer>.
+    Related source file is "/home/przemek/Desktop/ucisw2_repo/frameInformer.vhd".
+    Found 1-bit register for signal <newFrame>.
+    Found 2-bit register for signal <button>.
+    Found 10-bit register for signal <random>.
+    Found 21-bit register for signal <licznik_taktow>.
+    Found 21-bit adder for signal <licznik_taktow$addsub0000> created at line 67.
+    Found 21-bit comparator less for signal <newFrame$cmp_lt0000> created at line 65.
+    Found 1-bit xor4 for signal <random_0$xor0000> created at line 35.
+    Summary:
+	inferred  34 D-type flip-flop(s).
+	inferred   1 Adder/Subtractor(s).
+	inferred   1 Comparator(s).
+	inferred   1 Xor(s).
+Unit <frameinformer> synthesized.
+
+
+Synthesizing Unit <obrazek>.
+    Related source file is "/home/przemek/Desktop/ucisw2_repo/obrazek.vhd".
+WARNING:Xst:737 - Found 10-bit latch for signal <enemy_1_x>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+    Found 1-bit register for signal <bullet_shot>.
+    Found 10-bit comparator greatequal for signal <bullet_shot$cmp_ge0000> created at line 116.
+    Found 10-bit comparator greatequal for signal <bullet_shot$cmp_ge0001> created at line 116.
+    Found 10-bit comparator greater for signal <bullet_shot$cmp_gt0000> created at line 104.
+    Found 11-bit comparator greater for signal <bullet_shot$cmp_gt0001> created at line 116.
+    Found 10-bit comparator greater for signal <bullet_shot$cmp_gt0002> created at line 116.
+    Found 10-bit comparator lessequal for signal <bullet_shot$cmp_le0000> created at line 104.
+    Found 11-bit comparator lessequal for signal <bullet_shot$cmp_le0001> created at line 116.
+    Found 10-bit comparator lessequal for signal <bullet_shot$cmp_le0002> created at line 116.
+    Found 10-bit comparator less for signal <bullet_shot$cmp_lt0000> created at line 116.
+    Found 10-bit comparator less for signal <bullet_shot$cmp_lt0001> created at line 116.
+    Found 10-bit register for signal <bullet_x>.
+    Found 10-bit adder for signal <bullet_x$addsub0000> created at line 111.
+    Found 10-bit subtractor for signal <bullet_x$sub0000> created at line 111.
+    Found 10-bit register for signal <bullet_y>.
+    Found 10-bit subtractor for signal <bullet_y$addsub0000> created at line 114.
+    Found 10-bit adder for signal <color$add0001> created at line 150.
+    Found 10-bit adder for signal <color$addsub0001> created at line 158.
+    Found 10-bit adder for signal <color$addsub0002> created at line 158.
+    Found 10-bit adder carry out for signal <color$addsub0003> created at line 150.
+    Found 10-bit adder carry out for signal <color$addsub0004> created at line 145.
+    Found 10-bit comparator greatequal for signal <color$cmp_ge0000> created at line 145.
+    Found 10-bit comparator greatequal for signal <color$cmp_ge0001> created at line 145.
+    Found 10-bit comparator greatequal for signal <color$cmp_ge0002> created at line 150.
+    Found 10-bit comparator greatequal for signal <color$cmp_ge0003> created at line 150.
+    Found 10-bit comparator greatequal for signal <color$cmp_ge0004> created at line 158.
+    Found 10-bit comparator greatequal for signal <color$cmp_ge0005> created at line 158.
+    Found 11-bit comparator lessequal for signal <color$cmp_le0000> created at line 145.
+    Found 11-bit comparator lessequal for signal <color$cmp_le0001> created at line 150.
+    Found 10-bit comparator lessequal for signal <color$cmp_le0002> created at line 150.
+    Found 10-bit comparator lessequal for signal <color$cmp_le0003> created at line 158.
+    Found 10-bit comparator lessequal for signal <color$cmp_le0004> created at line 158.
+    Found 10-bit up accumulator for signal <enemy_1_y>.
+    Found 10-bit register for signal <player_x>.
+    Found 10-bit comparator greater for signal <player_x$cmp_gt0000> created at line 90.
+    Found 10-bit comparator less for signal <player_x$cmp_lt0000> created at line 95.
+    Found 10-bit 4-to-1 multiplexer for signal <player_x$mux0000>.
+    Found 10-bit addsub for signal <player_x$share0000>.
+    Summary:
+	inferred   1 Accumulator(s).
+	inferred  21 D-type flip-flop(s).
+	inferred   9 Adder/Subtractor(s).
+	inferred  23 Comparator(s).
+	inferred  10 Multiplexer(s).
+Unit <obrazek> synthesized.
+
+
+Synthesizing Unit <rs232>.
+    Related source file is "/home/przemek/Desktop/ucisw2_repo/rs232.vhd".
+    Found finite state machine <FSM_0> for signal <stan_nadawania>.
+    -----------------------------------------------------------------------
+    | States             | 4                                              |
+    | Transitions        | 9                                              |
+    | Inputs             | 3                                              |
+    | Outputs            | 6                                              |
+    | Clock              | Clk_50MHz                 (rising_edge)        |
+    | Reset              | Reset                     (positive)           |
+    | Reset type         | asynchronous                                   |
+    | Reset State        | st_gotowy                                      |
+    | Power Up State     | st_gotowy                                      |
+    | Encoding           | automatic                                      |
+    | Implementation     | LUT                                            |
+    -----------------------------------------------------------------------
+    Found finite state machine <FSM_1> for signal <stan_odbioru>.
+    -----------------------------------------------------------------------
+    | States             | 4                                              |
+    | Transitions        | 11                                             |
+    | Inputs             | 6                                              |
+    | Outputs            | 6                                              |
+    | Clock              | Clk_50MHz                 (rising_edge)        |
+    | Reset              | Reset                     (positive)           |
+    | Reset type         | asynchronous                                   |
+    | Reset State        | st_gotowy                                      |
+    | Power Up State     | st_gotowy                                      |
+    | Encoding           | automatic                                      |
+    | Implementation     | LUT                                            |
+    -----------------------------------------------------------------------
+    Found 1-bit register for signal <RxRdy>.
+    Found 1-bit register for signal <TxBusy>.
+    Found 1-bit register for signal <RS232_TxD>.
+    Found 8-bit register for signal <RxDO>.
+    Found 3-bit up counter for signal <licznik_bitow>.
+    Found 3-bit register for signal <licznik_bitow_odbior>.
+    Found 3-bit adder for signal <licznik_bitow_odbior$addsub0000> created at line 145.
+    Found 9-bit register for signal <licznik_taktow>.
+    Found 9-bit adder for signal <licznik_taktow$addsub0000>.
+    Found 9-bit register for signal <licznik_taktow_odbior>.
+    Found 9-bit adder for signal <licznik_taktow_odbior$share0000> created at line 112.
+    Found 1-bit register for signal <RS232_RxD_stable>.
+    Found 1-bit register for signal <RS232_RxD_stable_pre>.
+    Found 8-bit register for signal <RxDO_buffer>.
+    Found 9-bit comparator less for signal <stan_nadawania$cmp_lt0000> created at line 58.
+    Found 3-bit comparator less for signal <stan_nadawania$cmp_lt0001> created at line 71.
+    Found 9-bit comparator less for signal <stan_odbioru$cmp_lt0000> created at line 123.
+    Found 9-bit comparator less for signal <stan_odbioru$cmp_lt0001> created at line 135.
+    Found 9-bit comparator less for signal <stan_odbioru$cmp_lt0002> created at line 150.
+    Found 8-bit register for signal <transmitowany_bajt>.
+    Summary:
+	inferred   2 Finite State Machine(s).
+	inferred   1 Counter(s).
+	inferred  50 D-type flip-flop(s).
+	inferred   3 Adder/Subtractor(s).
+	inferred   5 Comparator(s).
+Unit <rs232> synthesized.
+
+
+Synthesizing Unit <vga_controller>.
+    Related source file is "/home/przemek/Desktop/ucisw2_repo/vga_controller.vhd".
+    Found 1-bit register for signal <h_sync>.
+    Found 10-bit register for signal <row>.
+    Found 10-bit register for signal <column>.
+    Found 1-bit register for signal <vga_b>.
+    Found 1-bit register for signal <vga_g>.
+    Found 1-bit register for signal <v_sync>.
+    Found 1-bit register for signal <vga_r>.
+    Found 11-bit comparator greatequal for signal <column$cmp_ge0000> created at line 91.
+    Found 10-bit comparator greatequal for signal <column$cmp_ge0001> created at line 89.
+    Found 11-bit register for signal <h_count>.
+    Found 11-bit adder for signal <h_count$addsub0000> created at line 64.
+    Found 11-bit comparator less for signal <h_count$cmp_lt0000> created at line 63.
+    Found 11-bit comparator greatequal for signal <h_sync$cmp_ge0000> created at line 75.
+    Found 11-bit comparator less for signal <h_sync$cmp_lt0000> created at line 75.
+    Found 10-bit comparator less for signal <row$cmp_lt0000> created at line 89.
+    Found 10-bit register for signal <v_count>.
+    Found 10-bit adder for signal <v_count$addsub0000> created at line 68.
+    Found 10-bit comparator less for signal <v_count$cmp_lt0001> created at line 67.
+    Found 10-bit comparator greatequal for signal <v_sync$cmp_ge0000> created at line 82.
+    Found 10-bit comparator less for signal <v_sync$cmp_lt0000> created at line 82.
+    Found 11-bit comparator less for signal <vga_b$cmp_lt0000> created at line 97.
+    Summary:
+	inferred  46 D-type flip-flop(s).
+	inferred   2 Adder/Subtractor(s).
+	inferred  10 Comparator(s).
+Unit <vga_controller> synthesized.
+
+
+Synthesizing Unit <freq_gen>.
+    Related source file is "freq_gen.v".
+Unit <freq_gen> synthesized.
+
+
+Synthesizing Unit <schematic>.
+    Related source file is "schematic.vf".
+Unit <schematic> synthesized.
+
+INFO:Xst:1767 - HDL ADVISOR - Resource sharing has identified that some arithmetic operations in this design can share the same physical resources for reduced device utilization. For improved clock frequency you may try to disable resource sharing.
+
+=========================================================================
+HDL Synthesis Report
+
+Macro Statistics
+# Adders/Subtractors                                   : 15
+ 10-bit adder                                          : 5
+ 10-bit adder carry out                                : 2
+ 10-bit addsub                                         : 1
+ 10-bit subtractor                                     : 2
+ 11-bit adder                                          : 1
+ 21-bit adder                                          : 1
+ 3-bit adder                                           : 1
+ 9-bit adder                                           : 2
+# Counters                                             : 1
+ 3-bit up counter                                      : 1
+# Accumulators                                         : 1
+ 10-bit up accumulator                                 : 1
+# Registers                                            : 44
+ 1-bit register                                        : 30
+ 10-bit register                                       : 6
+ 11-bit register                                       : 1
+ 2-bit register                                        : 1
+ 21-bit register                                       : 1
+ 3-bit register                                        : 1
+ 8-bit register                                        : 2
+ 9-bit register                                        : 2
+# Latches                                              : 1
+ 10-bit latch                                          : 1
+# Comparators                                          : 39
+ 10-bit comparator greatequal                          : 10
+ 10-bit comparator greater                             : 3
+ 10-bit comparator less                                : 6
+ 10-bit comparator lessequal                           : 5
+ 11-bit comparator greatequal                          : 2
+ 11-bit comparator greater                             : 1
+ 11-bit comparator less                                : 3
+ 11-bit comparator lessequal                           : 3
+ 21-bit comparator less                                : 1
+ 3-bit comparator less                                 : 1
+ 9-bit comparator less                                 : 4
+# Multiplexers                                         : 1
+ 10-bit 4-to-1 multiplexer                             : 1
+# Xors                                                 : 1
+ 1-bit xor4                                            : 1
+
+=========================================================================
+
+=========================================================================
+*                       Advanced HDL Synthesis                          *
+=========================================================================
+
+Analyzing FSM <FSM_1> for best encoding.
+Optimizing FSM <inst1_rs232/stan_odbioru/FSM> on signal <stan_odbioru[1:2]> with gray encoding.
+---------------------------
+ State         | Encoding
+---------------------------
+ st_gotowy     | 00
+ st_bit_startu | 01
+ st_dane       | 11
+ st_bit_stopu  | 10
+---------------------------
+Analyzing FSM <FSM_0> for best encoding.
+Optimizing FSM <inst1_rs232/stan_nadawania/FSM> on signal <stan_nadawania[1:2]> with gray encoding.
+---------------------------
+ State         | Encoding
+---------------------------
+ st_gotowy     | 00
+ st_bit_startu | 01
+ st_dane       | 11
+ st_bit_stopu  | 10
+---------------------------
+
+=========================================================================
+Advanced HDL Synthesis Report
+
+Macro Statistics
+# FSMs                                                 : 2
+# Adders/Subtractors                                   : 15
+ 10-bit adder                                          : 5
+ 10-bit adder carry out                                : 2
+ 10-bit addsub                                         : 1
+ 10-bit subtractor                                     : 2
+ 11-bit adder                                          : 1
+ 21-bit adder                                          : 1
+ 3-bit adder                                           : 1
+ 9-bit adder                                           : 2
+# Counters                                             : 1
+ 3-bit up counter                                      : 1
+# Accumulators                                         : 1
+ 10-bit up accumulator                                 : 1
+# Registers                                            : 164
+ Flip-Flops                                            : 164
+# Latches                                              : 1
+ 10-bit latch                                          : 1
+# Comparators                                          : 39
+ 10-bit comparator greatequal                          : 10
+ 10-bit comparator greater                             : 3
+ 10-bit comparator less                                : 6
+ 10-bit comparator lessequal                           : 5
+ 11-bit comparator greatequal                          : 2
+ 11-bit comparator greater                             : 1
+ 11-bit comparator less                                : 3
+ 11-bit comparator lessequal                           : 3
+ 21-bit comparator less                                : 1
+ 3-bit comparator less                                 : 1
+ 9-bit comparator less                                 : 4
+# Multiplexers                                         : 1
+ 10-bit 4-to-1 multiplexer                             : 1
+# Xors                                                 : 1
+ 1-bit xor4                                            : 1
+
+=========================================================================
+
+=========================================================================
+*                         Low Level Synthesis                           *
+=========================================================================
+
+Optimizing unit <schematic> ...
+
+Optimizing unit <frameinformer> ...
+
+Optimizing unit <rs232> ...
+
+Optimizing unit <vga_controller> ...
+
+Optimizing unit <obrazek> ...
+WARNING:Xst:2677 - Node <inst1_rs232/TxBusy> of sequential type is unconnected in block <schematic>.
+
+Mapping all equations...
+Building and optimizing final netlist ...
+Found area constraint ratio of 100 (+ 5) on block schematic, actual ratio is 6.
+
+Final Macro Processing ...
+
+=========================================================================
+Final Register Report
+
+Macro Statistics
+# Registers                                            : 180
+ Flip-Flops                                            : 180
+
+=========================================================================
+
+=========================================================================
+*                           Partition Report                            *
+=========================================================================
+
+Partition Implementation Status
+-------------------------------
+
+  No Partitions were found in this design.
+
+-------------------------------
+
+=========================================================================
+*                            Final Report                               *
+=========================================================================
+Final Results
+RTL Top Level Output File Name     : schematic.ngr
+Top Level Output File Name         : schematic
+Output Format                      : NGC
+Optimization Goal                  : Speed
+Keep Hierarchy                     : No
+
+Design Statistics
+# IOs                              : 9
+
+Cell Usage :
+# BELS                             : 867
+#      GND                         : 1
+#      INV                         : 32
+#      LUT1                        : 70
+#      LUT2                        : 154
+#      LUT2_L                      : 2
+#      LUT3                        : 103
+#      LUT3_D                      : 3
+#      LUT3_L                      : 3
+#      LUT4                        : 131
+#      LUT4_D                      : 7
+#      LUT4_L                      : 7
+#      MUXCY                       : 250
+#      MUXF5                       : 13
+#      VCC                         : 1
+#      XORCY                       : 90
+# FlipFlops/Latches                : 190
+#      FD                          : 3
+#      FDC                         : 107
+#      FDCE                        : 53
+#      FDE                         : 10
+#      FDP                         : 7
+#      LD                          : 10
+# Clock Buffers                    : 3
+#      BUFG                        : 3
+# IO Buffers                       : 9
+#      IBUF                        : 2
+#      IBUFG                       : 1
+#      OBUF                        : 6
+# DCMs                             : 1
+#      DCM_SP                      : 1
+=========================================================================
+
+Device utilization summary:
+---------------------------
+
+Selected Device : 3s500efg320-4 
+
+ Number of Slices:                      279  out of   4656     5%  
+ Number of Slice Flip Flops:            190  out of   9312     2%  
+ Number of 4 input LUTs:                512  out of   9312     5%  
+ Number of IOs:                           9
+ Number of bonded IOBs:                   9  out of    232     3%  
+ Number of GCLKs:                         3  out of     24    12%  
+ Number of DCMs:                          1  out of      4    25%  
+
+---------------------------
+Partition Resource Summary:
+---------------------------
+
+  No Partitions were found in this design.
+
+---------------------------
+
+
+=========================================================================
+TIMING REPORT
+
+NOTE: THESE TIMING NUMBERS ARE ONLY A SYNTHESIS ESTIMATE.
+      FOR ACCURATE TIMING INFORMATION PLEASE REFER TO THE TRACE REPORT
+      GENERATED AFTER PLACE-and-ROUTE.
+
+Clock Information:
+------------------
+-----------------------------------+---------------------------------+-------+
+Clock Signal                       | Clock buffer(FF name)           | Load  |
+-----------------------------------+---------------------------------+-------+
+Clk_50MHz                          | inst1_freq_gen/DCM_SP_INST:CLKFX| 48    |
+Clk_50MHz                          | inst1_freq_gen/DCM_SP_INST:CLK0 | 91    |
+XLXN_249                           | NONE(inst1_obrazek/enemy_1_x_9) | 10    |
+inst1_frameInformer/newFrame1      | BUFG                            | 41    |
+-----------------------------------+---------------------------------+-------+
+INFO:Xst:2169 - HDL ADVISOR - Some clock signals were not automatically buffered by XST with BUFG/BUFR resources. Please use the buffer_type constraint in order to insert these buffers to the clock signals to help prevent skew problems.
+
+Asynchronous Control Signals Information:
+----------------------------------------
+-----------------------------------+------------------------------------+-------+
+Control Signal                     | Buffer(FF name)                    | Load  |
+-----------------------------------+------------------------------------+-------+
+XLXN_249(XLXI_8:Q)                 | NONE(inst1_frameInformer/button_0) | 121   |
+XLXN_247(XLXI_4:Q)                 | NONE(inst1_vga_controller/column_0)| 46    |
+-----------------------------------+------------------------------------+-------+
+
+Timing Summary:
+---------------
+Speed Grade: -4
+
+   Minimum period: 12.260ns (Maximum Frequency: 81.565MHz)
+   Minimum input arrival time before clock: 1.946ns
+   Maximum output required time after clock: 4.310ns
+   Maximum combinational path delay: No path found
+
+Timing Detail:
+--------------
+All values displayed in nanoseconds (ns)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'Clk_50MHz'
+  Clock period: 12.260ns (frequency: 81.565MHz)
+  Total number of paths / destination ports: 5555 / 189
+-------------------------------------------------------------------------
+Delay:               3.772ns (Levels of Logic = 2)
+  Source:            XLXI_8 (FF)
+  Destination:       inst1_vga_controller/vga_g (FF)
+  Source Clock:      Clk_50MHz rising
+  Destination Clock: Clk_50MHz rising 1.3X
+
+  Data Path: XLXI_8 to inst1_vga_controller/vga_g
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FD:C->Q             137   0.591   1.330  XLXI_8 (XLXN_249)
+     LUT3_L:I2->LO         1   0.704   0.135  inst1_vga_controller/vga_g_mux00011_SW0 (N69)
+     LUT4:I2->O            1   0.704   0.000  inst1_vga_controller/vga_g_mux00011 (inst1_vga_controller/vga_g_mux0001)
+     FDC:D                     0.308          inst1_vga_controller/vga_g
+    ----------------------------------------
+    Total                      3.772ns (2.307ns logic, 1.465ns route)
+                                       (61.2% logic, 38.8% route)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'inst1_frameInformer/newFrame1'
+  Clock period: 8.125ns (frequency: 123.077MHz)
+  Total number of paths / destination ports: 1979 / 52
+-------------------------------------------------------------------------
+Delay:               8.125ns (Levels of Logic = 6)
+  Source:            inst1_obrazek/enemy_1_y_6 (FF)
+  Destination:       inst1_obrazek/bullet_y_2 (FF)
+  Source Clock:      inst1_frameInformer/newFrame1 rising
+  Destination Clock: inst1_frameInformer/newFrame1 rising
+
+  Data Path: inst1_obrazek/enemy_1_y_6 to inst1_obrazek/bullet_y_2
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDC:C->Q             12   0.591   1.136  inst1_obrazek/enemy_1_y_6 (inst1_obrazek/enemy_1_y_6)
+     LUT4:I0->O            1   0.704   0.000  inst1_obrazek/color_add0001<9>1 (inst1_obrazek/color_add0001<9>1)
+     MUXF5:I1->O           2   0.321   0.622  inst1_obrazek/color_add0001<9>_f5 (inst1_obrazek/color_add0001<9>)
+     LUT2:I0->O            1   0.704   0.000  inst1_obrazek/Mcompar_bullet_shot_cmp_gt0002_lut<9> (inst1_obrazek/Mcompar_bullet_shot_cmp_gt0002_lut<9>)
+     MUXCY:S->O            1   0.864   0.499  inst1_obrazek/Mcompar_bullet_shot_cmp_gt0002_cy<9> (inst1_obrazek/Mcompar_bullet_shot_cmp_gt0002_cy<9>)
+     LUT4_D:I1->O         11   0.704   0.968  inst1_obrazek/bullet_y_mux0002<1>11 (inst1_obrazek/N2)
+     LUT3:I2->O            1   0.704   0.000  inst1_obrazek/bullet_shot_mux00001 (inst1_obrazek/bullet_shot_mux0000)
+     FDCE:D                    0.308          inst1_obrazek/bullet_shot
+    ----------------------------------------
+    Total                      8.125ns (4.900ns logic, 3.225ns route)
+                                       (60.3% logic, 39.7% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'Clk_50MHz'
+  Total number of paths / destination ports: 2 / 2
+-------------------------------------------------------------------------
+Offset:              1.946ns (Levels of Logic = 1)
+  Source:            btn_south (PAD)
+  Destination:       XLXI_8 (FF)
+  Destination Clock: Clk_50MHz rising
+
+  Data Path: btn_south to XLXI_8
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O             1   1.218   0.420  btn_south_IBUF (btn_south_IBUF)
+     FD:D                      0.308          XLXI_8
+    ----------------------------------------
+    Total                      1.946ns (1.526ns logic, 0.420ns route)
+                                       (78.4% logic, 21.6% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'Clk_50MHz'
+  Total number of paths / destination ports: 6 / 6
+-------------------------------------------------------------------------
+Offset:              4.310ns (Levels of Logic = 1)
+  Source:            inst1_rs232/RS232_TxD (FF)
+  Destination:       RS232_TXD (PAD)
+  Source Clock:      Clk_50MHz rising
+
+  Data Path: inst1_rs232/RS232_TxD to RS232_TXD
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDP:C->Q              2   0.591   0.447  inst1_rs232/RS232_TxD (inst1_rs232/RS232_TxD)
+     OBUF:I->O                 3.272          RS232_TXD_OBUF (RS232_TXD)
+    ----------------------------------------
+    Total                      4.310ns (3.863ns logic, 0.447ns route)
+                                       (89.6% logic, 10.4% route)
+
+=========================================================================
+
+
+Total REAL time to Xst completion: 7.00 secs
+Total CPU time to Xst completion: 6.44 secs
+ 
+--> 
+
+
+Total memory usage is 530740 kilobytes
+
+Number of errors   :    0 (   0 filtered)
+Number of warnings :    2 (   0 filtered)
+Number of infos    :    2 (   0 filtered)
+

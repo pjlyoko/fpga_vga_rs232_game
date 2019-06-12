@@ -1,0 +1,25 @@
+V3 12
+FL /home/przemek/Desktop/ucisw2_repo/frameInformer.vhd 2019/06/12.17:34:38 P.20131013
+EN work/frameInformer 1560355959 \
+      FL /home/przemek/Desktop/ucisw2_repo/frameInformer.vhd \
+      PB ieee/std_logic_1164 1381692176 PB ieee/NUMERIC_STD 1381692181
+AR work/frameInformer/Behavioral 1560355960 \
+      FL /home/przemek/Desktop/ucisw2_repo/frameInformer.vhd \
+      EN work/frameInformer 1560355959
+FL /home/przemek/Desktop/ucisw2_repo/obrazek.vhd 2019/06/12.17:34:38 P.20131013
+EN work/obrazek 1560355961 FL /home/przemek/Desktop/ucisw2_repo/obrazek.vhd \
+      PB ieee/std_logic_1164 1381692176 PB ieee/NUMERIC_STD 1381692181
+AR work/obrazek/Behavioral 1560355962 \
+      FL /home/przemek/Desktop/ucisw2_repo/obrazek.vhd EN work/obrazek 1560355961
+FL /home/przemek/Desktop/ucisw2_repo/rs232.vhd 2019/06/12.16:58:06 P.20131013
+EN work/rs232 1560355963 FL /home/przemek/Desktop/ucisw2_repo/rs232.vhd \
+      PB ieee/std_logic_1164 1381692176 PB ieee/NUMERIC_STD 1381692181
+AR work/rs232/Behavioral 1560355964 \
+      FL /home/przemek/Desktop/ucisw2_repo/rs232.vhd EN work/rs232 1560355963
+FL /home/przemek/Desktop/ucisw2_repo/vga_controller.vhd 2019/06/10.08:10:39 P.20131013
+EN work/vga_controller 1560355965 \
+      FL /home/przemek/Desktop/ucisw2_repo/vga_controller.vhd \
+      PB ieee/std_logic_1164 1381692176 PB ieee/NUMERIC_STD 1381692181
+AR work/vga_controller/Behavioral 1560355966 \
+      FL /home/przemek/Desktop/ucisw2_repo/vga_controller.vhd \
+      EN work/vga_controller 1560355965

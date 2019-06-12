@@ -1,0 +1,10 @@
+AR frameinformer behavioral /home/przemek/Desktop/ucisw2_repo/frameInformer.vhd sub00/vhpl01 1560355960
+EN obrazek NULL /home/przemek/Desktop/ucisw2_repo/obrazek.vhd sub00/vhpl02 1560355961
+MO schematic NULL schematic.vf vlg49/schematic.bin 1560355959
+EN frameinformer NULL /home/przemek/Desktop/ucisw2_repo/frameInformer.vhd sub00/vhpl00 1560355959
+AR rs232 behavioral /home/przemek/Desktop/ucisw2_repo/rs232.vhd sub00/vhpl05 1560355964
+MO freq_gen NULL freq_gen.v vlg13/freq__gen.bin 1560355959
+AR obrazek behavioral /home/przemek/Desktop/ucisw2_repo/obrazek.vhd sub00/vhpl03 1560355962
+AR vga_controller behavioral /home/przemek/Desktop/ucisw2_repo/vga_controller.vhd sub00/vhpl07 1560355966
+EN rs232 NULL /home/przemek/Desktop/ucisw2_repo/rs232.vhd sub00/vhpl04 1560355963
+EN vga_controller NULL /home/przemek/Desktop/ucisw2_repo/vga_controller.vhd sub00/vhpl06 1560355965

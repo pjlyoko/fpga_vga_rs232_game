@@ -1,0 +1,17 @@
+//! **************************************************************************
+// Written by: Map P.20131013 on Wed Jun 12 18:12:53 2019
+//! **************************************************************************
+
+SCHEMATIC START;
+COMP "VGA_B" LOCATE = SITE "G15" LEVEL 1;
+COMP "VGA_G" LOCATE = SITE "H15" LEVEL 1;
+COMP "VGA_R" LOCATE = SITE "H14" LEVEL 1;
+COMP "Clk_50MHz" LOCATE = SITE "C9" LEVEL 1;
+COMP "btn_south" LOCATE = SITE "K17" LEVEL 1;
+COMP "VGA_HS" LOCATE = SITE "F15" LEVEL 1;
+COMP "VGA_VS" LOCATE = SITE "F14" LEVEL 1;
+COMP "RS232_RXD" LOCATE = SITE "R7" LEVEL 1;
+COMP "RS232_TXD" LOCATE = SITE "M14" LEVEL 1;
+NET "inst1_freq_gen/CLKIN_IBUFG" PERIOD = 20 ns HIGH 50%;
+SCHEMATIC END;
+

@@ -1,0 +1,6 @@
+vhdl work "vga_controller.vhd"
+vhdl work "rs232.vhd"
+vhdl work "obrazek.vhd"
+verilog work "freq_gen.v"
+vhdl work "frameInformer.vhd"
+verilog work "schematic.vf"

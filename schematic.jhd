@@ -1,0 +1,11 @@
+MODULE schematic
+	SUBMODULE freq_gen
+		INSTANCE inst1_freq_gen
+	SUBMODULE vga_controller
+		INSTANCE inst1_vga_controller
+	SUBMODULE obrazek
+		INSTANCE inst1_obrazek
+	SUBMODULE rs232
+		INSTANCE inst1_rs232
+	SUBMODULE frameInformer
+		INSTANCE inst1_frameInformer

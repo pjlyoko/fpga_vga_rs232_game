@@ -1,0 +1,103 @@
+////////////////////////////////////////////////////////////////////////////////
+// Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+////////////////////////////////////////////////////////////////////////////////
+//   ____  ____ 
+//  /   /\/   / 
+// /___/  \  /    Vendor: Xilinx 
+// \   \   \/     Version : 14.7
+//  \   \         Application : sch2hdl
+//  /   /         Filename : schematic.vf
+// /___/   /\     Timestamp : 06/12/2019 18:12:36
+// \   \  /  \ 
+//  \___\/\___\ 
+//
+//Command: sch2hdl -intstyle ise -family spartan3e -verilog /home/przemek/Desktop/ucisw2_repo/schematic.vf -w /home/przemek/Desktop/ucisw2_repo/schematic.sch
+//Design Name: schematic
+//Device: spartan3e
+//Purpose:
+//    This verilog netlist is translated from an ECS schematic.It can be 
+//    synthesized and simulated, but it should not be modified. 
+//
+`timescale 1ns / 1ps
+
+module schematic(btn_south, 
+                 Clk_50MHz, 
+                 RS232_RXD, 
+                 RS232_TXD, 
+                 VGA_B, 
+                 VGA_G, 
+                 VGA_HS, 
+                 VGA_R, 
+                 VGA_VS);
+
+    input btn_south;
+    input Clk_50MHz;
+    input RS232_RXD;
+   output RS232_TXD;
+   output VGA_B;
+   output VGA_G;
+   output VGA_HS;
+   output VGA_R;
+   output VGA_VS;
+   
+   wire [2:0] XLXN_37;
+   wire [1:0] XLXN_125;
+   wire XLXN_128;
+   wire [7:0] XLXN_131;
+   wire XLXN_202;
+   wire XLXN_214;
+   wire [9:0] XLXN_215;
+   wire [9:0] XLXN_219;
+   wire [9:0] XLXN_230;
+   wire XLXN_239;
+   wire XLXN_247;
+   wire XLXN_249;
+   wire XLXN_251;
+   
+   frameInformer  inst1_frameInformer (.ByteIn(XLXN_131[7:0]), 
+                                      .Byte_Rdy(XLXN_128), 
+                                      .Clk_50MHz(XLXN_251), 
+                                      .Reset(XLXN_249), 
+                                      .button(XLXN_125[1:0]), 
+                                      .newFrame(XLXN_214), 
+                                      .random(XLXN_230[9:0]));
+   freq_gen  inst1_freq_gen (.CLKIN_IN(Clk_50MHz), 
+                            .CLKFX_OUT(XLXN_202), 
+                            .CLKIN_IBUFG_OUT(), 
+                            .CLK0_OUT(XLXN_251));
+   obrazek  inst1_obrazek (.button(XLXN_125[1:0]), 
+                          .column(XLXN_219[9:0]), 
+                          .newFrame(XLXN_214), 
+                          .randomX(XLXN_230[9:0]), 
+                          .reset(XLXN_249), 
+                          .row(XLXN_215[9:0]), 
+                          .color(XLXN_37[2:0]));
+   rs232  inst1_rs232 (.Clk_50MHz(XLXN_251), 
+                      .Reset(XLXN_249), 
+                      .RS232_RxD(RS232_RXD), 
+                      .TxDI(XLXN_131[7:0]), 
+                      .TxStart(XLXN_128), 
+                      .RS232_TxD(RS232_TXD), 
+                      .RxDO(XLXN_131[7:0]), 
+                      .RxRdy(XLXN_128), 
+                      .TxBusy());
+   vga_controller  inst1_vga_controller (.color(XLXN_37[2:0]), 
+                                        .pixel_clk(XLXN_202), 
+                                        .reset(XLXN_247), 
+                                        .column(XLXN_219[9:0]), 
+                                        .h_sync(VGA_HS), 
+                                        .row(XLXN_215[9:0]), 
+                                        .vga_b(VGA_B), 
+                                        .vga_g(VGA_G), 
+                                        .vga_r(VGA_R), 
+                                        .v_sync(VGA_VS));
+   FD #( .INIT(1'b0) ) XLXI_3 (.C(XLXN_202), 
+              .D(XLXN_249), 
+              .Q(XLXN_239));
+   FD #( .INIT(1'b0) ) XLXI_4 (.C(XLXN_202), 
+              .D(XLXN_239), 
+              .Q(XLXN_247));
+   FD #( .INIT(1'b0) ) XLXI_8 (.C(XLXN_251), 
+              .D(btn_south), 
+              .Q(XLXN_249));
+endmodule

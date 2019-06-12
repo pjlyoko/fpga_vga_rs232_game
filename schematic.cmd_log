@@ -1,0 +1,23 @@
+xst -intstyle ise -ifn "/home/przemek/Desktop/ucisw2_repo/schematic.xst" -ofn "/home/przemek/Desktop/ucisw2_repo/schematic.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc GenIO.ucf -p xc3s500e-fg320-4 schematic.ngc schematic.ngd  
+map -intstyle ise -p xc3s500e-fg320-4 -cm area -ir off -pr off -c 100 -o schematic_map.ncd schematic.ngd schematic.pcf 
+par -w -intstyle ise -ol high -t 1 schematic_map.ncd schematic.ncd schematic.pcf 
+trce -intstyle ise -v 3 -s 4 -n 3 -fastpaths -xml schematic.twx schematic.ncd -o schematic.twr schematic.pcf -ucf GenIO.ucf 
+bitgen -intstyle ise -f schematic.ut schematic.ncd 
+xst -intstyle ise -ifn "/home/przemek/Desktop/ucisw2_repo/schematic.xst" -ofn "/home/przemek/Desktop/ucisw2_repo/schematic.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc GenIO.ucf -p xc3s500e-fg320-4 schematic.ngc schematic.ngd  
+map -intstyle ise -p xc3s500e-fg320-4 -cm area -ir off -pr off -c 100 -o schematic_map.ncd schematic.ngd schematic.pcf 
+par -w -intstyle ise -ol high -t 1 schematic_map.ncd schematic.ncd schematic.pcf 
+xst -intstyle ise -ifn "/home/przemek/Desktop/ucisw2_repo/schematic.xst" -ofn "/home/przemek/Desktop/ucisw2_repo/schematic.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc GenIO.ucf -p xc3s500e-fg320-4 schematic.ngc schematic.ngd  
+map -intstyle ise -p xc3s500e-fg320-4 -cm area -ir off -pr off -c 100 -o schematic_map.ncd schematic.ngd schematic.pcf 
+par -w -intstyle ise -ol high -t 1 schematic_map.ncd schematic.ncd schematic.pcf 
+trce -intstyle ise -v 3 -s 4 -n 3 -fastpaths -xml schematic.twx schematic.ncd -o schematic.twr schematic.pcf -ucf GenIO.ucf 
+bitgen -intstyle ise -f schematic.ut schematic.ncd 
+xst -intstyle ise -ifn "/home/przemek/Desktop/ucisw2_repo/schematic.xst" -ofn "/home/przemek/Desktop/ucisw2_repo/schematic.syr" 
+xst -intstyle ise -ifn "/home/przemek/Desktop/ucisw2_repo/schematic.xst" -ofn "/home/przemek/Desktop/ucisw2_repo/schematic.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc GenIO.ucf -p xc3s500e-fg320-4 schematic.ngc schematic.ngd  
+map -intstyle ise -p xc3s500e-fg320-4 -cm area -ir off -pr off -c 100 -o schematic_map.ncd schematic.ngd schematic.pcf 
+par -w -intstyle ise -ol high -t 1 schematic_map.ncd schematic.ncd schematic.pcf 
+trce -intstyle ise -v 3 -s 4 -n 3 -fastpaths -xml schematic.twx schematic.ncd -o schematic.twr schematic.pcf -ucf GenIO.ucf 
+bitgen -intstyle ise -f schematic.ut schematic.ncd 
