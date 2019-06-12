@@ -30,6 +30,8 @@ architecture Behavioral of rs232 is
    
    signal RS232_RxD_stable_pre:  STD_LOGIC                       := '1';
    signal RS232_RxD_stable:      STD_LOGIC                       := '1';
+	
+	signal RxDO_buffer:           STD_LOGIC_VECTOR (7 downto 0)   := (others => '0');
 begin
    nadawanie: process(Clk_50MHz, Reset)
    begin
@@ -101,17 +103,16 @@ begin
          licznik_taktow_odbior <= 0;
          licznik_bitow_odbior  <= 0;
          RxDO                  <= (others => '0');
+			RxDO_buffer           <= (others => '0');
          
       elsif(rising_edge(Clk_50MHz)) then
-         RS232_RxD_stable     <= RS232_RxD_stable_pre;
-			RS232_RxD_stable_pre <= RS232_RxD;
+         RS232_RxD_stable     <= RS232_RxD;
+			RS232_RxD_stable_pre <= RS232_RxD_stable;
          
 			case stan_odbioru is
             when st_gotowy =>
                RxRDY <= '0';
-					-- RS232_RxD_stable_pre jest sygnałem "na bieżąco"
-					-- RS232_RxD_stable     jest sygnałem opóźnionym o 1 takt, biorącym wartość z RS232_RxD_stable_pre
-               if RS232_RxD_stable_pre = '0' and RS232_RxD_stable = '1' then -- Zbocze opadające odbieranego sygnału
+               if RS232_RxD_stable_pre = '1' and RS232_RxD_stable = '0' then -- Zbocze opadające odbieranego sygnału
                   stan_odbioru <= st_bit_startu;
                   licznik_taktow_odbior <= 0;
                   licznik_bitow_odbior <= 0;
@@ -134,7 +135,7 @@ begin
                if(licznik_taktow_odbior < cykle_na_bit - 1) then
                   licznik_taktow_odbior <= licznik_taktow_odbior + 1;
                else
-						RxDO(licznik_bitow_odbior) <= RS232_RxD_stable;
+						RxDO_buffer(licznik_bitow_odbior) <= RS232_RxD_stable;
 						licznik_taktow_odbior <= 0;
 						
 						if(licznik_bitow_odbior = 7) then
@@ -152,6 +153,7 @@ begin
                   licznik_taktow_odbior <= 0;
                   stan_odbioru <= st_gotowy;
                   RxRDY <= '1';
+						RxDO <= RxDO_buffer;
                end if;
             
             when others =>

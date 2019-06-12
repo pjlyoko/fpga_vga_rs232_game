@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <report-views version="2.0" >
  <header>
-  <DateModified>2019-06-10T13:37:57</DateModified>
+  <DateModified>2019-06-12T13:08:00</DateModified>
   <ModuleName>schematic</ModuleName>
   <SummaryTimeStamp>2019-06-10T13:27:31</SummaryTimeStamp>
-  <SavedFilePath>/home/przemek/Desktop/ucisw2_repo/iseconfig/schematic.xreport</SavedFilePath>
-  <ImplementationReportsDirectory>/home/przemek/Desktop/ucisw2_repo/</ImplementationReportsDirectory>
+  <SavedFilePath>/home/przemek/Desktop/ucisw/repo/iseconfig/schematic.xreport</SavedFilePath>
+  <ImplementationReportsDirectory>/home/przemek/Desktop/ucisw/repo/</ImplementationReportsDirectory>
   <DateInitialized>2019-06-07T09:22:07</DateInitialized>
   <EnableMessageFiltering>false</EnableMessageFiltering>
  </header>

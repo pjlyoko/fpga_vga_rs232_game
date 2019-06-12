@@ -1,1 +1,1 @@
--intstyle "ise" -incremental -lib "unisims_ver" -lib "unimacro_ver" -lib "xilinxcorelib_ver" -o "/home/przemek/Desktop/ucisw2_repo/schematic_isim_beh.exe" -prj "/home/przemek/Desktop/ucisw2_repo/schematic_beh.prj" "work.schematic" "work.glbl" 
+-intstyle "ise" -incremental -o "/home/przemek/Desktop/ucisw/repo/rs232_test_nadawanie_isim_beh.exe" -prj "/home/przemek/Desktop/ucisw/repo/rs232_test_nadawanie_beh.prj" "work.rs232_test_nadawanie" 

@@ -24,7 +24,7 @@ ARCHITECTURE behavior OF rs232_test_odbierania IS
    signal TxStart:   STD_LOGIC                    := '0';
    signal Reset:     STD_LOGIC                    := '0';
    signal Clk_50MHz: STD_LOGIC                    := '0';
-   signal RS232_RxD: STD_LOGIC                    := '0';
+   signal RS232_RxD: STD_LOGIC                    := '1'; -- Default line state is HIGH.
 
    --Outputs
    signal RxRdy:     STD_LOGIC;
@@ -42,10 +42,7 @@ ARCHITECTURE behavior OF rs232_test_odbierania IS
    
    constant SIM_TIME : time := 5 * BYTE_TIME;
    constant SIM_CYCLES : positive := SIM_TIME / Clk_50MHz_period;
-   
-   -- test data
-   signal test_byte: STD_LOGIC_VECTOR(0 to 7);
- 
+	
 BEGIN
    -- Instantiate the Unit Under Test (UUT)
    uut: rs232 PORT MAP (TxDI => TxDI,
@@ -71,8 +68,18 @@ BEGIN
 
    -- Stimulus process
    stim_proc: process
-   begin    
-      test_byte <= "11110000";
+		procedure simulate_receiveing(byte: in STD_LOGIC_VECTOR) is
+		begin
+			RS232_RxD <= '0';
+			wait for BIT_TIME;
+			for i in byte'REVERSE_RANGE loop
+				RS232_RxD <= byte(i);
+				wait for BIT_TIME;
+			end loop;
+			RS232_RxD <= '1';
+			wait for 4 * BIT_TIME;
+		end procedure;
+   begin
       RS232_RxD <= '1';
       
       Reset <= '1';
@@ -82,26 +89,8 @@ BEGIN
       wait for 10 * BIT_TIME; 
       wait for Clk_50MHz_period / 2;
       
-      RS232_RxD <= '0';
-      wait for BIT_TIME;
-      for i in test_byte'RANGE loop
-         RS232_RxD <= test_byte(i);
-         wait for BIT_TIME;
-      end loop;
-      RS232_RxD <= '1';
-      wait for BIT_TIME;
-      
-      wait for 3 * BIT_TIME;
-      
-      test_byte <= "00001111";
-      RS232_RxD <= '0';
-      wait for BIT_TIME;
-      for i in test_byte'RANGE loop
-         RS232_RxD <= test_byte(i);
-         wait for BIT_TIME;
-      end loop;
-      RS232_RxD <= '1';
-      wait for BIT_TIME;
+		simulate_receiveing("11110000");
+		simulate_receiveing("00001111");
       
       wait;
    end process;
